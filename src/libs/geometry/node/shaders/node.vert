@@ -22,7 +22,7 @@ varying vec3 vPickerColor;
 varying float vDecay;
 varying float vDist;
 varying float vDistSq;
-varying float vSpriteMix;
+// varying float vSpriteMix;
 varying float vIsHovered;
 varying float vIsSelected;
 varying float vId;
@@ -85,32 +85,26 @@ void main() {
 //    vSpriteMix *= (1.0 - isSelected);
 
     vec3 newCamPos = camPos - (normalize(camPos) * 600.0);
-
     float distToCamPos = distance(currentPosition.xyz, newCamPos);
 
-    vSpriteMix = clamp(pow(distToCamPos, 0.85) * 0.001, 0.0, 1.0 );
+    // vSpriteMix = clamp(pow(distToCamPos, 0.85) * 0.001, 0.0, 1.0 );
 
+    vBackside = 1.0;
     float sizeMultiplier = 1.0;
     if (dot( currentPosition.xyz - normalize(camPos) * 150.0, normalize(camPos) ) > 0.0) {
         vBackside = 0.0;
-
-    } else {
-        if (isDepth == 1.0) {
-            //sizeMultiplier = 1.5;
-        }
-        vBackside = 1.0;
     }
 
     vBackSideOnly = backSideOnly;
     vFrontSideOnly = frontSideOnly;
 
-    if (vBackSideOnly == 1.0  ) {
+    if (backSideOnly == 1.0) {
       if (vBackside == 0.0) {
         sizeMultiplier = 0.0;
       }
     }
 
-    if (vFrontSideOnly == 1.0  ) {
+    if (frontSideOnly == 1.0  ) {
       if (vBackside == 1.0) {
         sizeMultiplier = 0.0;
       }

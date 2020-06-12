@@ -1,6 +1,9 @@
 uniform sampler2D positionTexture;
+uniform vec3 camPos;
 uniform float camDistToCenter;
 uniform float uTime;
+uniform float backSideOnly;
+uniform float frontSideOnly;
 
 attribute float updated;
 attribute vec2 texLocation;
@@ -8,6 +11,10 @@ attribute vec2 texLocation;
 varying float vAlpha;
 varying float vUpdated;
 varying vec4 vCurrentPosition;
+varying float vBackside;
+varying float vBackSideOnly;
+varying float vFrontSideOnly;
+varying vec3 vCamPos;
 
 float map(float value, float inMin, float inMax, float outMin, float outMax) {
   return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
@@ -16,30 +23,45 @@ float map(float value, float inMin, float inMax, float outMin, float outMax) {
 void main() {
   vec4 currentPosition = vec4(texture2D(positionTexture, texLocation.xy));
 
-  // node index stored in w component (2.0 is root)
-  if (currentPosition.w == 2.0) {
-    currentPosition.xyz = vec3(0.);
-  }
+    // node index stored in w component (2.0 is root)
+    if (currentPosition.w == 2.0) {
+      currentPosition.xyz = vec3(0.);
+    }
 
-  vCurrentPosition = currentPosition;
+    vCurrentPosition = currentPosition;
 
-  vUpdated = updated;
+    vUpdated = updated;
 
-  currentPosition.w = 1.0;
+    currentPosition.w = 1.0;
 
-  vec4 mvPosition = modelViewMatrix * currentPosition;
+    vec4 mvPosition = modelViewMatrix * currentPosition;
 
-  vAlpha = 2000.0 / dot(mvPosition.xyz, mvPosition.xyz);
+    vAlpha = 2000.0 / dot(mvPosition.xyz, mvPosition.xyz);
 
-  float dofAmount = clamp(map(camDistToCenter, 0., 800., 0., 1.), 0., 1.);
+    float dofAmount = clamp(map(camDistToCenter, 0., 800., 0., 1.), 0., 1.);
 
-  float scaledTime = uTime * 0.13;
-  if (scaledTime < 1.) {
-    vAlpha -= (1.0 - scaledTime);
-    dofAmount -= (1.0 - scaledTime);
-  }
+    float scaledTime = uTime * 0.13;
+    if (scaledTime < 1.) {
+      vAlpha -= (1.0 - scaledTime);
+      dofAmount -= (1.0 - scaledTime);
+    }
 
-  vAlpha = mix(vAlpha, .15, dofAmount);
+    vAlpha = mix(vAlpha, .15, dofAmount);
+
+    vCamPos = camPos;
+
+    vec3 newCamPos = camPos - (normalize(camPos) * 600.0);
+    float distToCamPos = distance(currentPosition.xyz, newCamPos);
+
+    vBackside = 1.0;
+    if (dot( currentPosition.xyz - normalize(camPos) * 150.0, normalize(camPos) ) > 0.0) {
+      vBackside = 0.0;
+    }
+
+    vBackSideOnly = backSideOnly;
+    vFrontSideOnly = frontSideOnly;
+
+
   
   gl_Position = projectionMatrix * mvPosition;
 }

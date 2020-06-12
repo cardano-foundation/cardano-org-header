@@ -87,6 +87,18 @@ export default class EdgeGeometry {
           uTime: {
             type: 'f',
             value: null
+          },
+          backSideOnly: {
+            type: 'f',
+            value: 1.0
+          },
+          frontSideOnly: {
+            type: 'f',
+            value: 0.0
+          },
+          camPos: {
+            type: 'v3',
+            value: new Vector3()
           }
         },
         transparent: true,
@@ -109,5 +121,6 @@ export default class EdgeGeometry {
     const center = new Vector3(0.0, 0.0, 0.0)
     this.material.uniforms.camDistToCenter.value = camPos.distanceTo(center)
     this.material.uniforms.uTime.value += dt
+    this.material.uniforms.camPos.value = camPos
   }
 }

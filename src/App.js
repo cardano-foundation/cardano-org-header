@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {
   Vector2,
   Vector3,
-  Color,
   Scene,
   PerspectiveCamera,
   Quaternion,
@@ -19,11 +18,7 @@ import {
   Mesh,
   BackSide,
   BoxBufferGeometry,
-  RGBAFormat,
-  AdditiveBlending,
-  NoBlending,
-  CustomBlending,
-  AddEquation
+  CustomBlending
 } from 'three'
 
 import * as dat from 'dat.gui'
@@ -88,7 +83,6 @@ import Slider, { createSliderWithTooltip } from 'rc-slider'
 import SVG from 'react-inlinesvg'
 import siteDesign from './assets/images/blueHeader.png'
 
-import './style/medusa.scss'
 import FullscreenCloseImg from './style/images/close-fullscreen.svg'
 import IconCalendar from './style/images/control-calendar.svg'
 import IconPlay from './style/images/control-play.svg'
@@ -313,7 +307,7 @@ class App extends mixin(EventEmitter, Component) {
 
     this.clock = new Clock()
 
-    this.gui = new dat.GUI()
+    // this.gui = new dat.GUI()
 
     if (typeof URLSearchParams !== 'undefined') {
       let urlParams = new URLSearchParams(window.location.search)
@@ -681,10 +675,6 @@ class App extends mixin(EventEmitter, Component) {
     }
   }
 
-  resetBlend () {
-    this.blendFrame = 0
-  }
-
   initPost () {
     this.composerBack = new EffectComposer(this.renderer)
     this.composerFront = new EffectComposer(this.renderer)
@@ -695,21 +685,7 @@ class App extends mixin(EventEmitter, Component) {
     this.renderPass.alpha = true
     this.renderPass.transparent = true
 
-    this.renderPass2 = new RenderPass(this.scene, this.camera)
-    this.renderPass2.clear = true
-    this.renderPass2.alpha = true
-    this.renderPass2.transparent = true
-
     this.savePass = new SavePass()
-    // this.savePass.clear = true
-    this.savePass2 = new SavePass()
-    // this.savePass2.clear = true
-    this.copyPass = new ShaderPass(CopyShader)
-    this.copyPass.clear = true
-
-    // this.blendPass = new ShaderPass(BlendShader, 'tDiffuse1')
-    // this.blendPass.uniforms.tDiffuse2.value = this.savePass2.renderTarget.texture
-    // this.resetBlend()
 
     this.bokehScene = new Scene()
     const sphereGeo = new SphereBufferGeometry(500, 32, 32)
@@ -738,10 +714,10 @@ class App extends mixin(EventEmitter, Component) {
       height: window.innerHeight
     }, this.bokehSceneMat)
 
-    const post = this.gui.addFolder('Post')
-    post.add(this.bokehPass.uniforms.focus, 'value').min(0).max(2000)
-    post.add(this.bokehPass.uniforms.aperture, 'value')
-    post.add(this.bokehBoxMesh.position, 'z').min(220).max(260)
+    // const post = this.gui.addFolder('Post')
+    // post.add(this.bokehPass.uniforms.focus, 'value').min(0).max(2000)
+    // post.add(this.bokehPass.uniforms.aperture, 'value')
+    // post.add(this.bokehBoxMesh.position, 'z').min(220).max(260)
 
     this.composerBack.addPass(this.renderPass)
     this.composerBack.addPass(this.bokehPass)
@@ -750,20 +726,11 @@ class App extends mixin(EventEmitter, Component) {
 
     this.composerFront.addPass(this.renderPass)
     this.composerFront.addPass(this.savePass)
-    // this.composerFront.addPass(this.blendPass)
-
     this.rttPassFront = new TexturePass(this.composerFront.renderTarget2.texture)
     this.rttPassFront.material.blending = CustomBlending
 
     this.composerMerge.addPass(this.rttPassBack)
     this.composerMerge.addPass(this.rttPassFront)
-    // this.composerMerge.addPass(this.copyPass)
-
-    // this.rttPassMerge = new TexturePass(this.composerMerge.renderTarget2.texture)
-    //   this.rttPassMerge.clear = true
-    // this.rttPassMerge.renderToScreen = true
-
-    // this.composerMerge.addPass(this.rttPassMerge)
 
     this.afterimagePass = new AfterimagePass()
     this.composerMerge.addPass(this.afterimagePass)
@@ -818,15 +785,6 @@ class App extends mixin(EventEmitter, Component) {
 
     const dt = this.clock.getDelta()
 
-    if (this.blendPass) {
-      if (this.blendFrame === 0) {
-        this.blendPass.uniforms.mixRatio.value = 0.0
-      } else {
-        this.blendPass.uniforms.mixRatio.value = 0.8
-      }
-    }
-    this.blendFrame++
-
     this.currentFrame++
 
     if (this.FDG) {
@@ -856,14 +814,16 @@ class App extends mixin(EventEmitter, Component) {
       // this.renderer.render(this.scene, this.camera)
 
       if (this.FDG && this.FDG.nodes) {
-        // this.renderer.clear()
-
         this.FDG.nodes.material.uniforms.backSideOnly.value = 1.0
         this.FDG.nodes.material.uniforms.frontSideOnly.value = 0.0
+        this.FDG.edges.material.uniforms.backSideOnly.value = 1.0
+        this.FDG.edges.material.uniforms.frontSideOnly.value = 0.0
         this.composerBack.render()
 
         this.FDG.nodes.material.uniforms.backSideOnly.value = 0.0
         this.FDG.nodes.material.uniforms.frontSideOnly.value = 1.0
+        this.FDG.edges.material.uniforms.backSideOnly.value = 0.0
+        this.FDG.edges.material.uniforms.frontSideOnly.value = 1.0
         this.composerFront.render()
 
         this.composerMerge.render()
@@ -1085,7 +1045,6 @@ class App extends mixin(EventEmitter, Component) {
       this.composerFront.setSize(this.width, this.height)
       this.composerMerge.setSize(this.width, this.height)
     }
-    this.resetBlend()
 
     this.FDG.resize(this.width, this.height)
 

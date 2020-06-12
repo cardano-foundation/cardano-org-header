@@ -51,7 +51,7 @@ const AfterimageShader = {
 
     // '	texelOld *= damp * when_gt( texelOld, 0.01 );',
 
-    '	gl_FragColor = mix(texelNew, texelOld, 0.7);',
+    '	gl_FragColor = mix(texelNew, texelOld, damp);',
 
     '}'
 

@@ -24,7 +24,7 @@ const AfterimagePass = function (damp) {
 
   this.uniforms = UniformsUtils.clone(this.shader.uniforms)
 
-  this.uniforms[ 'damp' ].value = damp !== undefined ? damp : 0.7
+  this.uniforms[ 'damp' ].value = damp !== undefined ? damp : 0.75
 
   this.textureComp = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
 
@@ -47,13 +47,6 @@ const AfterimagePass = function (damp) {
     uniforms: this.uniforms,
     vertexShader: this.shader.vertexShader,
     fragmentShader: this.shader.fragmentShader
-
-    // blending: CustomBlending,
-    // blendEquation: AddEquation,
-    // blendSrc: OneFactor,
-    // blendDst: OneMinusSrcAlphaFactor,
-    // blendSrcAlpha: OneFactor,
-    // blendDstAlpha: OneMinusSrcAlphaFactor
 
   })
 

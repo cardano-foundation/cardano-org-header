@@ -4,9 +4,38 @@ varying float vAlpha;
 varying float vUpdated;
 varying vec4 vCurrentPosition;
 
+uniform float backSideOnly;
+uniform float frontSideOnly;
+varying vec3 vCamPos;
+
 void main(){
 
   vec3 color = vec3(0.);
+
+
+    float a = vAlpha;
+    float distToCenter = length(vCurrentPosition.xyz);
+    a *= pow(distToCenter, 2.0) * 0.000009;
+    //a *= pow(distToCenter, 2.0) * 0.000055;
+
+    vec3 newCamPos = vCamPos - (normalize(vCamPos) * 600.0);
+    float distToCamPos = distance(vCurrentPosition.xyz, newCamPos);
+
+    float backside = 1.0;
+    if (dot( vCurrentPosition.xyz - normalize(vCamPos) * 150.0, normalize(vCamPos) ) > 0.0) {
+      backside = 0.0;
+    }
+
+  if (backSideOnly == 1.0 && backside == 0.0) {
+    a = 0.0;
+    discard;
+  }
+
+  if (frontSideOnly == 1.0 && backside == 1.0) {
+    a = 0.0;
+    discard;
+  }
+
   // vec3 color = vec3(1.);
 
   /*if (cycleColors == 1.0) {
@@ -23,9 +52,7 @@ void main(){
   // } else {
 
 
-    float a = vAlpha;
-    float distToCenter = length(vCurrentPosition.xyz);
-    a *= pow(distToCenter, 2.0) * 0.0000055;
+
     // a = 0.0;
     gl_FragColor = vec4(color, a);
   // }

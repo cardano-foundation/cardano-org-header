@@ -7,7 +7,7 @@ uniform float cycleColors;
 varying float vDecay;
 varying vec4 vColor;
 varying float vDist;
-varying float vSpriteMix;
+// varying float vSpriteMix;
 varying float vIsHovered;
 varying float vIsSelected;
 varying float vId;
@@ -17,6 +17,22 @@ varying float vFrontSideOnly;
 
 void main() {
 
+  vec4 diffuse = vec4(vColor.rgb, 1.0);
+
+  if (vBackSideOnly == 1.0 && vBackside == 0.0) {
+    diffuse = vec4(0.0);
+    discard;
+  }
+
+  if (vFrontSideOnly == 1.0 && vBackside == 1.0) {
+    diffuse = vec4(0.0);
+    discard;
+  }
+  
+  if (vId == 0.0) {
+    discard;
+  } else {
+
 	// round particles
 	vec2 uv = (  vec3( gl_PointCoord.x, 1.0 - gl_PointCoord.y, 1 ) ).xy;
 	// vec2 toCenter = (uv - 0.5) * 2.0;
@@ -24,34 +40,15 @@ void main() {
 	// 	discard;
 	// }
 
-  if (vBackSideOnly == 1.0  ) {
-    if (vBackside == 0.0) {
-      discard;
-    }
-  }
-
-  if (vFrontSideOnly == 1.0  ) {
-    if (vBackside == 1.0) {
-      discard;
-    }
-  }
-  
-
-   if (vId == 0.0) {
-     discard;
-   } else {
-
-
-
-  vec4 sprite = vec4(1.);
-  vec4 spriteBlur = vec4(1.);
-  if (vDecay > 0.) {
-    sprite = texture2D(uMap, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
-    spriteBlur = texture2D(uMap, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
-  } else {
-    sprite = texture2D(map, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
-    spriteBlur = texture2D(mapBlur, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
-  }
+  // vec4 sprite = vec4(1.);
+  // vec4 spriteBlur = vec4(1.);
+  // if (vDecay > 0.) {
+  //   sprite = texture2D(uMap, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
+  //   spriteBlur = texture2D(uMap, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
+  // } else {
+  //   sprite = texture2D(map, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
+  //   spriteBlur = texture2D(mapBlur, vec2(gl_PointCoord.x, 1. - gl_PointCoord.y));
+  // }
 
    //vec4 diffuse = mix(sprite, spriteBlur, vBackside);
 
