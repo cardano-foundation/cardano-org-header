@@ -744,7 +744,7 @@ class App extends mixin(EventEmitter, Component) {
     // this.controls.minDistance = 10
     this.controls.maxDistance = 20000
     this.controls.enableZoom = false
-    this.controls.enablePan = true
+    this.controls.enablePan = false
     this.controls.screenSpacePanning = false
     this.controls.zoomSpeed = 0.7
     this.controls.rotateSpeed = 0.3
