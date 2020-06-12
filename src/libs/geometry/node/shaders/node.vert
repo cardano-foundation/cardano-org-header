@@ -10,6 +10,7 @@ uniform float nodeIsHovered;
 uniform float nodeIsSelected;
 uniform float backSideOnly;
 uniform float frontSideOnly;
+uniform float uCamPosZOffset;
 
 attribute vec3 pickerColor;
 attribute float isHovered; // id of hovered node
@@ -22,7 +23,6 @@ varying vec3 vPickerColor;
 varying float vDecay;
 varying float vDist;
 varying float vDistSq;
-// varying float vSpriteMix;
 varying float vIsHovered;
 varying float vIsSelected;
 varying float vId;
@@ -30,19 +30,10 @@ varying float vBackside;
 varying float vBackSideOnly;
 varying float vFrontSideOnly;
 
-
-varying vec2 vHighPrecisionZW;
-
-float map(float value, float inMin, float inMax, float outMin, float outMax) {
-  return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-}
-
 void main() {
     vId = id;
     vColor = color;
-
     vPickerColor = pickerColor; // color for GPU picker
-
     vIsHovered = isHovered;
     vIsSelected = isSelected;
 
@@ -51,9 +42,6 @@ void main() {
     if (id == 0.0) {
         currentPosition = vec3(0.);
     }
-
-
-
 
     vec4 mvPosition = modelViewMatrix * vec4(currentPosition, 1.);
 
@@ -65,34 +53,14 @@ void main() {
     float decayScale = scale * ((vDecay * 0.75) + 1.0);
 
     vDist = decayScale / length(mvPosition.xyz);
-   // vDistSq = decayScale / dot(mvPosition.xyz, mvPosition.xyz);
-
-    //float dofAmount = map(camDistToCenter, 0., 1000., 1., 0.);
-
-    //vSpriteMix = (1.0 - clamp(pow(vDistSq, 4.0), 0.0, 1.0)) * dofAmount;
-
-    //float scaledTime = uTime * 0.26;
-    //if (scaledTime < 1.) {
-    //    vSpriteMix += (1.0 - scaledTime);
-    //}
-
-    //vSpriteMix = clamp(vSpriteMix, 0., 1.);
-
-    //if (nodeIsHovered == 1.0) {
-    //    vSpriteMix = clamp( (1.0 - isHovered) * (dofAmount * 2.0), 0.0, 1.0);
-    //}
-
-//    vSpriteMix *= (1.0 - isSelected);
 
     vec3 newCamPos = camPos - (normalize(camPos) * 600.0);
     float distToCamPos = distance(currentPosition.xyz, newCamPos);
 
-    // vSpriteMix = clamp(pow(distToCamPos, 0.85) * 0.001, 0.0, 1.0 );
-
     vBackside = 1.0;
     float sizeMultiplier = 1.0;
-    if (dot( currentPosition.xyz - normalize(camPos) * 150.0, normalize(camPos) ) > 0.0) {
-        vBackside = 0.0;
+    if (dot( currentPosition.xyz - normalize(camPos) * uCamPosZOffset, normalize(camPos) ) > 0.0) {
+      vBackside = 0.0;
     }
 
     vBackSideOnly = backSideOnly;
@@ -114,7 +82,5 @@ void main() {
 
     gl_Position = projectionMatrix * mvPosition;
 
-
-	vHighPrecisionZW = gl_Position.zw;
 
 }

@@ -99,6 +99,10 @@ export default class EdgeGeometry {
           camPos: {
             type: 'v3',
             value: new Vector3()
+          },
+          uCamPosZOffset: {
+            type: 'f',
+            value: 150
           }
         },
         transparent: true,
@@ -122,5 +126,7 @@ export default class EdgeGeometry {
     this.material.uniforms.camDistToCenter.value = camPos.distanceTo(center)
     this.material.uniforms.uTime.value += dt
     this.material.uniforms.camPos.value = camPos
+
+    this.material.uniforms.uCamPosZOffset.value = this.config.FDG.focusPlaneOffset
   }
 }

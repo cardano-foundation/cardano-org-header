@@ -4,6 +4,7 @@ uniform float camDistToCenter;
 uniform float uTime;
 uniform float backSideOnly;
 uniform float frontSideOnly;
+uniform float uCamPosZOffset;
 
 attribute float updated;
 attribute vec2 texLocation;
@@ -36,17 +37,18 @@ void main() {
 
     vec4 mvPosition = modelViewMatrix * currentPosition;
 
-    vAlpha = 2000.0 / dot(mvPosition.xyz, mvPosition.xyz);
+    // vAlpha = 2000.0 / dot(mvPosition.xyz, mvPosition.xyz);
+    vAlpha = 0.18;
 
     float dofAmount = clamp(map(camDistToCenter, 0., 800., 0., 1.), 0., 1.);
 
     float scaledTime = uTime * 0.13;
     if (scaledTime < 1.) {
       vAlpha -= (1.0 - scaledTime);
-      dofAmount -= (1.0 - scaledTime);
+      //dofAmount -= (1.0 - scaledTime);
     }
 
-    vAlpha = mix(vAlpha, .15, dofAmount);
+    // vAlpha = mix(vAlpha, .15, dofAmount);
 
     vCamPos = camPos;
 
@@ -54,7 +56,7 @@ void main() {
     float distToCamPos = distance(currentPosition.xyz, newCamPos);
 
     vBackside = 1.0;
-    if (dot( currentPosition.xyz - normalize(camPos) * 150.0, normalize(camPos) ) > 0.0) {
+    if (dot( currentPosition.xyz - normalize(camPos) * uCamPosZOffset, normalize(camPos) ) > 0.0) {
       vBackside = 0.0;
     }
 

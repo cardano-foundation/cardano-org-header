@@ -6,8 +6,6 @@ import {
   Vector3,
   Scene,
   PerspectiveCamera,
-  Quaternion,
-  Euler,
   WebGLRenderer,
   Clock,
   UniformsUtils,
@@ -48,14 +46,11 @@ import DepthFragShader from './libs/geometry/node/shaders/depth.frag'
 
 // Post
 import EffectComposer from './libs/post/EffectComposer'
-import ShaderPass from './libs/post/ShaderPass'
 import RenderPass from './libs/post/RenderPass'
 import TexturePass from './libs/post/TexturePass'
 import BokehPass from './libs/post/BokehPass'
 
 import SavePass from './libs/post/SavePass'
-// import BlendShader from './libs/post/BlendShader'
-import CopyShader from './libs/post/CopyShader'
 import AfterimagePass from './libs/post/AfterimagePass'
 
 // Libs
@@ -81,7 +76,6 @@ import Smallogo from './style/images/logo-xs.svg'
 import Slider, { createSliderWithTooltip } from 'rc-slider'
 
 import SVG from 'react-inlinesvg'
-import siteDesign from './assets/images/blueHeader.png'
 
 import FullscreenCloseImg from './style/images/close-fullscreen.svg'
 import IconCalendar from './style/images/control-calendar.svg'
@@ -708,7 +702,7 @@ class App extends mixin(EventEmitter, Component) {
 
     this.bokehPass = new BokehPass(this.bokehScene, this.camera, {
       focus: 768,
-      aperture: 0.000009,
+      aperture: 0.0000095,
       maxblur: 0.01,
       width: window.innerWidth,
       height: window.innerHeight
@@ -732,7 +726,7 @@ class App extends mixin(EventEmitter, Component) {
     this.composerMerge.addPass(this.rttPassBack)
     this.composerMerge.addPass(this.rttPassFront)
 
-    this.afterimagePass = new AfterimagePass()
+    this.afterimagePass = new AfterimagePass(0.83)
     this.composerMerge.addPass(this.afterimagePass)
   }
 
@@ -841,9 +835,9 @@ class App extends mixin(EventEmitter, Component) {
 
     this.canvas.addEventListener('mousedown', (e) => {
       // timeout.call(this)
-      if (this.FDG && this.FDG.enabled) {
-        this.FDG.onMouseDown()
-      }
+      // if (this.FDG && this.FDG.enabled) {
+      //   this.FDG.onMouseDown()
+      // }
     })
 
     this.canvas.addEventListener('mouseup', (e) => {
@@ -974,22 +968,9 @@ class App extends mixin(EventEmitter, Component) {
     this.camera.position.y = this.config.camera.initPos.y
     this.camera.position.z = this.config.camera.initPos.z
 
-    // speed of lerp
-    this.cameraLerpSpeed = 0.03
-
     // set target positions
     this.cameraPos = this.camera.position.clone() // current camera position
     this.targetCameraPos = this.cameraPos.clone() // target camera position
-
-    this.cameraLookAtPos = new Vector3(0, 0, 0) // current camera lookat
-    this.targetCameraLookAt = new Vector3(0, 0, 0) // target camera lookat
-    this.camera.lookAt(this.cameraLookAtPos)
-
-    // set initial camera rotations
-    this.cameraFromQuaternion = new Quaternion().copy(this.camera.quaternion)
-    let cameraToRotation = new Euler().copy(this.camera.rotation)
-    this.cameraToQuaternion = new Quaternion().setFromEuler(cameraToRotation)
-    this.cameraMoveQuaternion = new Quaternion()
 
     this.camera.updateMatrixWorld()
     this.setCameraSettings()
@@ -1009,7 +990,6 @@ class App extends mixin(EventEmitter, Component) {
     this.renderer = new WebGLRenderer({
       antialias: false,
       canvas: this.canvas,
-      logarithmicDepthBuffer: true,
       alpha: true,
       powerPreference: 'high-performance'
     })
@@ -1800,7 +1780,6 @@ class App extends mixin(EventEmitter, Component) {
           config={this.config}
         />
         {this.UI()}
-        <img src={siteDesign} className='header-image' id='header-image' />
         <canvas width={this.config.scene.width} height={this.config.scene.height} id={this.config.scene.canvasID} />
       </div>
     )

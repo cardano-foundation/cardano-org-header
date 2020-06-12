@@ -240,6 +240,10 @@ export default class NodeGeometry {
         type: 'f',
         value: 0.0
       }
+      uniforms.uCamPosZOffset = {
+        type: 'f',
+        value: 150.0
+      }
 
       this.material = new ShaderMaterial({
         uniforms: uniforms,
@@ -299,5 +303,7 @@ export default class NodeGeometry {
     const center = new Vector3(0.0, 0.0, 0.0)
     this.material.uniforms.camDistToCenter.value = camPos.distanceTo(center)
     this.material.uniforms.camPos.value = camPos
+
+    this.material.uniforms.uCamPosZOffset.value = this.config.FDG.focusPlaneOffset
   }
 }

@@ -110,6 +110,7 @@ const Config = {
     colorCooldownSpeed: 0.05, // speed at which node colors cycle
     filePathCharLimit: 20, // speed at which node colors cycle
     cycleColors: false, // cycle colors based on file edit time from red to blue to white
+    focusPlaneOffset: 250,
     colorPalette: [ // colors to use if cycleColors is switched off
       /* '#eb2256',
       '#f69ab3',
