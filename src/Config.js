@@ -5,6 +5,10 @@ import {
 
 import Detector from './libs/Detector'
 
+import { getGPUTier } from 'detect-gpu'
+
+const GPUTier = getGPUTier()
+
 const detector = new Detector()
 
 const Config = {
@@ -100,7 +104,7 @@ const Config = {
     useIndexedDB: false // enable firebase indexedDB (currently this seems buggy)
   },
   FDG: {
-    nodeCount: 3000, // max number of nodes the scene can contain
+    nodeCount: 2500, // max number of nodes the scene can contain
     autoPlay: true,
     delayAmount: 1000, // time in between new commits being added to the graph
     sphereProject: 0, // project graph onto sphere? 1 == true, 0 == false
@@ -144,7 +148,8 @@ const Config = {
   dev: {
     debugPicker: false
   },
-  floatType: detector.isIOS ? HalfFloatType : FloatType
+  floatType: detector.isIOS ? HalfFloatType : FloatType,
+  GPUTier: GPUTier
 }
 
 export default Config

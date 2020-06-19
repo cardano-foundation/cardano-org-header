@@ -670,64 +670,68 @@ class App extends mixin(EventEmitter, Component) {
   }
 
   initPost () {
-    this.composerBack = new EffectComposer(this.renderer)
-    this.composerFront = new EffectComposer(this.renderer)
-    this.composerMerge = new EffectComposer(this.renderer)
-
     this.renderPass = new RenderPass(this.scene, this.camera)
-    this.renderPass.clear = true
-    this.renderPass.alpha = true
-    this.renderPass.transparent = true
 
-    this.savePass = new SavePass()
+    if (this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3') {
+      this.composerBack = new EffectComposer(this.renderer)
+      this.composerFront = new EffectComposer(this.renderer)
+      this.composerMerge = new EffectComposer(this.renderer)
+      this.savePass = new SavePass()
+      this.bokehScene = new Scene()
+      const sphereGeo = new SphereBufferGeometry(500, 32, 32)
+      this.bokehSceneMat = new MeshDepthMaterial({
+        depthWrite: false,
+        side: BackSide
+      })
 
-    this.bokehScene = new Scene()
-    const sphereGeo = new SphereBufferGeometry(500, 32, 32)
-    this.bokehSceneMat = new MeshDepthMaterial({
-      depthWrite: false,
-      side: BackSide
-    })
+      this.bokehSphereMesh = new Mesh(sphereGeo, this.bokehSceneMat)
+      this.bokehSphereMesh.frustumCulled = false
+      this.bokehSphereMesh.renderOrder = 2
+      this.bokehScene.add(this.bokehSphereMesh)
 
-    this.bokehSphereMesh = new Mesh(sphereGeo, this.bokehSceneMat)
-    this.bokehSphereMesh.frustumCulled = false
-    this.bokehSphereMesh.renderOrder = 2
-    this.bokehScene.add(this.bokehSphereMesh)
+      const boxGeo = new BoxBufferGeometry(2000, 2000, 0.1)
+      this.bokehBoxMesh = new Mesh(boxGeo, this.bokehSceneMat)
+      this.bokehBoxMesh.frustumCulled = false
+      this.bokehBoxMesh.position.z = 220
+      this.bokehBoxMesh.renderOrder = 1
+      this.bokehScene.add(this.bokehBoxMesh)
 
-    const boxGeo = new BoxBufferGeometry(2000, 2000, 0.1)
-    this.bokehBoxMesh = new Mesh(boxGeo, this.bokehSceneMat)
-    this.bokehBoxMesh.frustumCulled = false
-    this.bokehBoxMesh.position.z = 220
-    this.bokehBoxMesh.renderOrder = 1
-    this.bokehScene.add(this.bokehBoxMesh)
+      this.bokehPass = new BokehPass(this.bokehScene, this.camera, {
+        focus: 768,
+        aperture: 0.0000095,
+        maxblur: 0.01,
+        width: window.innerWidth,
+        height: window.innerHeight
+      }, this.bokehSceneMat)
 
-    this.bokehPass = new BokehPass(this.bokehScene, this.camera, {
-      focus: 768,
-      aperture: 0.0000095,
-      maxblur: 0.01,
-      width: window.innerWidth,
-      height: window.innerHeight
-    }, this.bokehSceneMat)
+      // const post = this.gui.addFolder('Post')
+      // post.add(this.bokehPass.uniforms.focus, 'value').min(0).max(2000)
+      // post.add(this.bokehPass.uniforms.aperture, 'value')
+      // post.add(this.bokehBoxMesh.position, 'z').min(220).max(260)
 
-    // const post = this.gui.addFolder('Post')
-    // post.add(this.bokehPass.uniforms.focus, 'value').min(0).max(2000)
-    // post.add(this.bokehPass.uniforms.aperture, 'value')
-    // post.add(this.bokehBoxMesh.position, 'z').min(220).max(260)
+      this.composerBack.addPass(this.renderPass)
+      this.composerBack.addPass(this.bokehPass)
+      this.composerBack.addPass(this.savePass)
+      this.rttPassBack = new TexturePass(this.composerBack.renderTarget1.texture)
 
-    this.composerBack.addPass(this.renderPass)
-    this.composerBack.addPass(this.bokehPass)
-    this.composerBack.addPass(this.savePass)
-    this.rttPassBack = new TexturePass(this.composerBack.renderTarget1.texture)
+      this.composerFront.addPass(this.renderPass)
+      this.composerFront.addPass(this.savePass)
+      this.rttPassFront = new TexturePass(this.composerFront.renderTarget2.texture)
+      this.rttPassFront.material.blending = CustomBlending
 
-    this.composerFront.addPass(this.renderPass)
-    this.composerFront.addPass(this.savePass)
-    this.rttPassFront = new TexturePass(this.composerFront.renderTarget2.texture)
-    this.rttPassFront.material.blending = CustomBlending
+      this.composerMerge.addPass(this.rttPassBack)
+      this.composerMerge.addPass(this.rttPassFront)
 
-    this.composerMerge.addPass(this.rttPassBack)
-    this.composerMerge.addPass(this.rttPassFront)
+      this.afterimagePass = new AfterimagePass(0.83)
+      this.composerMerge.addPass(this.afterimagePass)
+    } else {
+      this.composer = new EffectComposer(this.renderer)
 
-    this.afterimagePass = new AfterimagePass(0.83)
-    this.composerMerge.addPass(this.afterimagePass)
+      this.composer.addPass(this.renderPass)
+
+      this.afterimagePass = new AfterimagePass(0.83)
+      this.composer.addPass(this.afterimagePass)
+    }
   }
 
   initControls () {
@@ -802,25 +806,35 @@ class App extends mixin(EventEmitter, Component) {
     if (this.FDG && this.config.dev.debugPicker) {
       this.renderer.render(this.FDG.pickingScene, this.camera)
     } else {
-      this.bokehBoxMesh.lookAt(this.camera.position)
+      if (this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3') {
+        this.bokehBoxMesh.lookAt(this.camera.position)
+      }
 
       // this.renderer.setRenderTarget(null)
       // this.renderer.render(this.scene, this.camera)
 
       if (this.FDG && this.FDG.nodes) {
-        this.FDG.nodes.material.uniforms.backSideOnly.value = 1.0
-        this.FDG.nodes.material.uniforms.frontSideOnly.value = 0.0
-        this.FDG.edges.material.uniforms.backSideOnly.value = 1.0
-        this.FDG.edges.material.uniforms.frontSideOnly.value = 0.0
-        this.composerBack.render()
+        if (this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3') {
+          this.FDG.nodes.material.uniforms.backSideOnly.value = 1.0
+          this.FDG.nodes.material.uniforms.frontSideOnly.value = 0.0
+          this.FDG.edges.material.uniforms.backSideOnly.value = 1.0
+          this.FDG.edges.material.uniforms.frontSideOnly.value = 0.0
+          this.composerBack.render()
 
-        this.FDG.nodes.material.uniforms.backSideOnly.value = 0.0
-        this.FDG.nodes.material.uniforms.frontSideOnly.value = 1.0
-        this.FDG.edges.material.uniforms.backSideOnly.value = 0.0
-        this.FDG.edges.material.uniforms.frontSideOnly.value = 1.0
-        this.composerFront.render()
+          this.FDG.nodes.material.uniforms.backSideOnly.value = 0.0
+          this.FDG.nodes.material.uniforms.frontSideOnly.value = 1.0
+          this.FDG.edges.material.uniforms.backSideOnly.value = 0.0
+          this.FDG.edges.material.uniforms.frontSideOnly.value = 1.0
+          this.composerFront.render()
 
-        this.composerMerge.render()
+          this.composerMerge.render()
+        } else {
+          this.FDG.nodes.material.uniforms.backSideOnly.value = 0.0
+          this.FDG.nodes.material.uniforms.frontSideOnly.value = 0.0
+          this.FDG.edges.material.uniforms.backSideOnly.value = 0.0
+          this.FDG.edges.material.uniforms.frontSideOnly.value = 0.0
+          this.composer.render()
+        }
       }
     }
   }
@@ -1026,13 +1040,17 @@ class App extends mixin(EventEmitter, Component) {
       this.composerMerge.setSize(this.width, this.height)
     }
 
+    if (this.composer) {
+      this.composer.setSize(this.width, this.height)
+    }
+
     this.FDG.resize(this.width, this.height)
 
-    this.savePass.renderTarget.setSize(this.width, this.height)
-
-    this.bokehPass.renderTargetDepth.setSize(this.width, this.height)
-
-    this.bokehPass.uniforms.aspect.value = this.width / this.height
+    if (this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3') {
+      this.savePass.renderTarget.setSize(this.width, this.height)
+      this.bokehPass.renderTargetDepth.setSize(this.width, this.height)
+      this.bokehPass.uniforms.aspect.value = this.width / this.height
+    }
   }
 
   /**
