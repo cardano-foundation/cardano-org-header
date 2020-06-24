@@ -108,7 +108,7 @@ const Config = {
     nodeUpdatedSpritePath: 'textures/dot-concentric.png', // path to node updated state texture
     fontTexturePath: 'textures/UbuntuMono.png', // path to font texture
     autoPlay: false,
-    delayAmount: 1000, // time in between new commits being added to the graph
+    delayAmount: 0, // time in between new commits being added to the graph
     sphereProject: 1, // project graph onto sphere? 1 == true, 0 == false
     usePicker: true, // show file commit details on click
     pickerLoadingPath: '/assets/images/loading.svg', // show file commit details on click
@@ -133,20 +133,20 @@ const Config = {
     width: 800,
     height: 600,
     bgColor: 0xFDFDFB,
-    //bgColor: 0x0033ad,
+    // bgColor: 0x0033ad,
     antialias: false,
     canvasID: 'medusa-stage', // ID of webgl canvas element
     autoRotate: false, // auto rotate camera around target
     autoRotateSpeed: 0.001 // speed of auto rotation
   },
   post: {
-    vignette: false,
+    vignette: false
   },
   camera: {
     fov: 45,
-    initPos: {x: 0, y: 0, z: 600},
+    initPos: { x: 0, y: 0, z: 600 },
     enableZoom: true, // enable camera zoom on mousewheel/pinch gesture
-    zPosMinimized: 1600,
+    zPosMinimized: 1600
   },
   dev: {
     debugPicker: false
