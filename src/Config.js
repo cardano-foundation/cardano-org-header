@@ -14,10 +14,10 @@ const detector = new Detector()
 const Config = {
   git: {
     owner: 'input-output-hk',
-    repo: 'cardano-sl',
-    branch: 'develop',
+    repo: 'ouroboros-network',
+    branch: 'master',
     commitHash: '', // hash of commit to load
-    commitDate: '', // date to load
+    commitDate: '', // date to load (YYYY-MM-DD)
     loadLatest: true, // load latest commit in db
     supportedRepos: [
       'cardano-sl',
@@ -36,8 +36,8 @@ const Config = {
     ]
   },
   display: {
-    showUI: true,
-    showSidebar: true,
+    showUI: false,
+    showSidebar: false,
     sidebarCommitLimit: 5,
     showClose: true
   },
@@ -104,46 +104,49 @@ const Config = {
     useIndexedDB: false // enable firebase indexedDB (currently this seems buggy)
   },
   FDG: {
-    nodeCount: 2500, // max number of nodes the scene can contain
-    autoPlay: true,
+    nodeSpritePath: 'textures/dot.png', // path to node texture
+    nodeUpdatedSpritePath: 'textures/dot-concentric.png', // path to node updated state texture
+    fontTexturePath: 'textures/UbuntuMono.png', // path to font texture
+    autoPlay: false,
     delayAmount: 1000, // time in between new commits being added to the graph
-    sphereProject: 0, // project graph onto sphere? 1 == true, 0 == false
-    sphereRadius: 700, // radius of sphere if in sphere projection mode
+    sphereProject: 1, // project graph onto sphere? 1 == true, 0 == false
+    usePicker: true, // show file commit details on click
+    pickerLoadingPath: '/assets/images/loading.svg', // show file commit details on click
+    sphereRadius: 250, // radius of sphere if in sphere projection mode
     showFilePaths: false, // display filepath overlay on nodes
-    usePicker: false, // show file commit details on click
     colorCooldownSpeed: 0.05, // speed at which node colors cycle
-    filePathCharLimit: 20, // speed at which node colors cycle
     cycleColors: false, // cycle colors based on file edit time from red to blue to white
-    focusPlaneOffset: 250,
-    colorPalette: [ // colors to use if cycleColors is switched off
-      /* '#eb2256',
-      '#f69ab3',
-      '#1746a0',
-      '#6f9cef',
-      '#652b91',
-      '#0e5c8d',
-      '#1fc1c3' */
-    ]
+    colorPalette: [ // colors to use if cycleColors is switched off (colors cannot contain)
+      '#ff5454',
+      '#3b7882',
+      '#0033ad',
+      '#0033ad'
+      // '#ffffff',
+      // '#ffffff'
+    ],
+    nodeCount: 2500, // max number of nodes the scene can contain
+    filePathCharLimit: 20, // speed at which node colors cycle
+    focusPlaneOffset: 250
   },
   scene: {
-    fullScreen: false,
+    fullScreen: true,
     width: 800,
     height: 600,
-    bgColor: 0x121327,
+    bgColor: 0xFDFDFB,
+    //bgColor: 0x0033ad,
     antialias: false,
-    canvasID: 'stage', // ID of wegbl canvas element
-    autoRotate: true, // auto rotate camera around target
-    autoRotateSpeed: 0.3 // speed of auto rotation
+    canvasID: 'medusa-stage', // ID of webgl canvas element
+    autoRotate: false, // auto rotate camera around target
+    autoRotateSpeed: 0.001 // speed of auto rotation
   },
   post: {
-    vignette: true,
-    bloom: true // post-processing bloom effect
+    vignette: false,
   },
   camera: {
-    fov: 60,
-    initPos: { x: 0, y: 0, z: 1200 },
+    fov: 45,
+    initPos: {x: 0, y: 0, z: 600},
+    enableZoom: true, // enable camera zoom on mousewheel/pinch gesture
     zPosMinimized: 1600,
-    enableZoom: true // enable camera zoom on mousewheel/pinch gesture
   },
   dev: {
     debugPicker: false

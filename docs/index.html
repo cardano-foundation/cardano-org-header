@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
+    <link rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <style>
 
       html {
@@ -28,177 +28,12 @@
       }
       
     </style>
-    <title>Cardano</title>
+    <title>Cardano.org</title>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="medusa-root"></div>
-    <!-- <a id="opener" href="?medusa=fullscreen"  style="position:fixed;bottom:0;right:0;z-index:9999">Fullscreen</a> -->
-      <script>
-
-        var config = {
-          git: {
-            owner: 'input-output-hk',
-            repo: 'ouroboros-network',
-            branch: 'master',
-            commitHash: '', // hash of commit to load
-            commitDate: '', // date to load (YYYY-MM-DD)
-            loadLatest: true // load latest commit in db
-          },
-          display: {
-            showUI: false,
-            showSidebar: false,
-            sidebarCommitLimit: 5
-
-          },
-          FDG: {
-            nodeSpritePath: 'textures/dot.png', // path to node texture
-            nodeUpdatedSpritePath: 'textures/dot-concentric.png', // path to node updated state texture
-            fontTexturePath: 'textures/UbuntuMono.png', // path to font texture
-            autoPlay: false,
-            delayAmount: 1000, // time in between new commits being added to the graph
-            sphereProject: 1, // project graph onto sphere? 1 == true, 0 == false
-            usePicker: true, // show file commit details on click
-            pickerLoadingPath: '/assets/images/loading.svg', // show file commit details on click
-            sphereRadius: 250, // radius of sphere if in sphere projection mode
-            showFilePaths: false, // display filepath overlay on nodes
-            colorCooldownSpeed: 0.05, // speed at which node colors cycle
-            cycleColors: false, // cycle colors based on file edit time from red to blue to white
-            colorPalette: [ // colors to use if cycleColors is switched off (colors cannot contain)
-              '#ff5454',
-              '#3b7882',
-              '#0033ad',
-              '#0033ad'
-              // '#ffffff',
-              // '#ffffff'
-            ]
-          },
-          widget:{
-            milestones:{
-              content: "<ul className='list-group list-group-flush'>\
-                <li className='list-group-item bg-transparent'>\
-                  <h4 className='m-0'><a href='#'>Version 1.3 update merge</a></h4>\
-                  <small>14. Feb 2018</small>\
-                </li>\
-                <li className='list-group-item bg-transparent'>\
-                  <h4 className='m-0'><a href='#'>Ouroboros implementation</a></h4>\
-                  <small>14. Feb 2018</small>\
-                </li>\
-                <li className='list-group-item bg-transparent'>\
-                  <h4 className='m-0'><a href='#'>RINA implementation</a></h4>\
-                  <small>14. Feb 2018</small>\
-                </li>\
-              </ul>"
-            }
-          },
-          scene: {
-            fullScreen: true,
-            width: 800,
-            height: 600,
-            bgColor: 0xFDFDFB,
-            //bgColor: 0x0033ad,
-            antialias: false,
-            canvasID: 'medusa-stage', // ID of webgl canvas element
-            autoRotate: false, // auto rotate camera around target
-            autoRotateSpeed: 0.001 // speed of auto rotation
-          },
-          post: {
-            vignette: true
-          },
-          camera: {
-            fov: 45,
-            initPos: {x: 0, y: 0, z: 600},
-            enableZoom: true // enable camera zoom on mousewheel/pinch gesture
-          }
-        }
-
-        var openmedusa = {
-          display: {
-            showUI: true,
-            showSidebar: true
-          },
-          camera: {
-            enableZoom: false,
-            initPos: { x: 0, y: 0, z: 1600 }
-          },
-          FDG: {
-            usePicker: false,
-            showFilePaths: false
-          }
-        }
-
-        window.onload = function() {
-
-          if (medusa.canRun()) {
-
-            medusa.init(config).on('ready', function() {
-
-              medusa.on('nodeMouseOver', function(data) {
-                document.querySelector('html').style.cursor = 'pointer'
-              })
-
-              medusa.on('nodeMouseOut', function(data) {
-                document.querySelector('html').style.cursor = 'default'
-              })
-
-              /**
-               * Available methods
-               */
-
-              // document.addEventListener('click', function() {
-              //   medusa.destroy()
-              // })
-
-              // medusa.loadCommit('18b737fa3bf08d2dc3e5faa6ecee60262fb3af8c')
-
-              // document.addEventListener('click', function() {
-              //    medusa.setConfig({
-              //     scene: {
-              //       fullScreen: false,
-              //       width: 800,
-              //       height: 600
-              //      }
-              //    })
-              //  })
-
-              //  medusa.getFirstCommit().then(function(data) {
-              //    console.log(data)
-              //  })
-
-              // medusa.getlastCommit().then(function(data) {
-              //   console.log(data)
-              // })
-
-              // medusa.on('commitChanged', function(data) {
-              //   console.log(data)
-              // })
-
-              // medusa.setDate('2018-01-01')
-
-              // medusa.setSphereView(true)
-
-              // medusa.setPlay(true)
-
-              // document.addEventListener('click', function() {
-              //   medusa.goToPrev()
-              // })
-
-              // document.addEventListener('click', function() {
-              //   medusa.goToNext()
-              // })
-
-            })
-
-            // var opener = document.getElementById('opener')
-            // opener.onclick = function(e){
-            //   //e.preventDefault();
-            //   //medusa.setConfig(openmedusa);
-            // }
-
-          }
-        }
-    </script>
-  <script type="text/javascript" src="./static/js/medusa.main.js"></script></body>
+  <script type="text/javascript" src="index.bundle.js"></script></body>
 </html>
