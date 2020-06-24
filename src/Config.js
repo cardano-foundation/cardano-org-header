@@ -130,8 +130,8 @@ const Config = {
   },
   scene: {
     fullScreen: true,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
     bgColor: 0xFDFDFB,
     // bgColor: 0x0033ad,
     antialias: false,
