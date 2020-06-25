@@ -3,14 +3,39 @@ import React, { Component } from 'react'
 import Medusa from '../../src/Medusa'
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    this.enabled = this.canRun()
+  }
+
+  canRun () {
+    if (!window.WebGLRenderingContext) {
+      console.log('Your browser does not support WebGL')
+      return false
+    }
+
+    let glContext = document.createElement('canvas').getContext('webgl')
+    if (glContext === null) {
+      glContext = document.createElement('canvas').getContext('experimental-webgl')
+    }
+
+    if (glContext === null) {
+      console.log('Your browser does not support WebGL')
+      return false
+    }
+
+    return true
   }
 
   render () {
-    return (
-      <Medusa ref='demo' />
-    )
+    if (this.enabled) {
+      return (
+        <div>
+          <Medusa className='medusa-container' ref='demo' />
+        </div>
+      )
+    }
   }
 }
 

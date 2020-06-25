@@ -1,6 +1,8 @@
 // 3rd Party
 import React, { Component } from 'react'
 
+import PropTypes from 'prop-types'
+
 import { Vector2 } from 'three/src/math/Vector2'
 import { Vector3 } from 'three/src/math/Vector3'
 import { Scene } from 'three/src/scenes/Scene'
@@ -293,6 +295,8 @@ const langLocales = {
 class Medusa extends mixin(EventEmitter, Component) {
   constructor (props) {
     super(props)
+
+    this.containerRef = React.createRef()
 
     this.config = deepAssign(Config, this.props.config)
 
@@ -1012,17 +1016,10 @@ class Medusa extends mixin(EventEmitter, Component) {
    * Window resize
    */
   resize () {
-    if (!this.camera) {
-      return
-    }
+    this.containerEl = this.containerRef.current
 
-    if (this.config.scene.fullScreen) {
-      this.width = window.innerWidth
-      this.height = window.innerHeight
-    } else {
-      this.width = this.config.scene.width
-      this.height = this.config.scene.height
-    }
+    this.width = this.containerEl.offsetWidth
+    this.height = this.containerEl.offsetHeight
 
     this.config.scene.width = this.width
     this.config.scene.height = this.height
@@ -1775,10 +1772,8 @@ class Medusa extends mixin(EventEmitter, Component) {
   // }
 
   render () {
-    const cls = (this.config.display.showUI) ? 'showing-UI App' : 'App'
-
     return (
-      <div className={`${cls} ${`bsnoclash`}`}>
+      <div className={this.props.className} ref={this.containerRef}>
         {/* <FileInfo
           fileInfoLocation={this.state.fileInfoLocation}
           showFileInfo={this.state.showFileInfo}
@@ -1799,6 +1794,10 @@ class Medusa extends mixin(EventEmitter, Component) {
       </div>
     )
   }
+}
+
+Medusa.propTypes = {
+  className: PropTypes.string
 }
 
 export default Medusa

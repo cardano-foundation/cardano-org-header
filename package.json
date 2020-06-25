@@ -1,15 +1,17 @@
 {
   "name": "cardano-org-header",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "3D WebGL Git Repository Visualization",
   "author": "Scott Darby <scott.darby@iohk.io>",
+  "homepage": "https://input-output-hk.github.io/cardano-org-header/",
   "main": "build/index.js",
   "files": [
-    "/docs",
+    "/build",
     "/src"
   ],
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/input-output-hk/cardano-org-header"
   },
   "browserify": {
     "transform": [
@@ -17,9 +19,10 @@
     ]
   },
   "scripts": {
-    "dev:demo": "webpack-dev-server --config webpack_demo.config.js --open",
+    "build": "npm run build:js",
     "build:demo": "webpack --config webpack_demo.prod.config.js",
-    "build": "webpack --config webpack.prod.config.js"
+    "build:js": "webpack --config webpack.prod.config.js",
+    "dev:demo": "webpack-dev-server --config webpack_demo.config.js --open"
   },
   "peerDependencies": {
     "react": "^16.8"
