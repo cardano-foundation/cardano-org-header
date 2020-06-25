@@ -30,9 +30,9 @@ import 'moment/locale/zh-cn'
 import 'moment/locale/ko'
 import 'moment/locale/en-gb'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
+// import firebase from 'firebase/app'
+// import 'firebase/firestore'
+// import 'firebase/auth'
 // import MD5 from './libs/MD5'
 // import Media from 'react-media'
 
@@ -55,6 +55,10 @@ import AfterimagePass from './libs/post/AfterimagePass'
 // Libs
 import Config from './Config'
 import FDG from './libs/FDG'
+
+// data
+import { nodes } from './data/nodes'
+import { edges } from './data/edges'
 
 // Components
 // import FileInfo from './components/FileInfo'
@@ -296,6 +300,9 @@ class Medusa extends mixin(EventEmitter, Component) {
   constructor (props) {
     super(props)
 
+    this.nodesStatic = nodes[0]
+    this.edgesStatic = edges
+
     this.containerRef = React.createRef()
 
     this.config = deepAssign(Config, this.props.config)
@@ -396,7 +403,7 @@ class Medusa extends mixin(EventEmitter, Component) {
       }
     }
 
-    this.initFireBase()
+    // this.initFireBase()
 
     this.running = true // whether the app is running
 
@@ -522,18 +529,18 @@ class Medusa extends mixin(EventEmitter, Component) {
   /**
    * Slow down a potential DDOS attack by requiring the user to be signed in anonymously
    */
-  async anonymousSignin () {
-    return new Promise((resolve, reject) => {
-      firebase.auth().signInAnonymously()
-        .then(() => {
-          resolve()
-        })
-        .catch(function (error) {
-          console.log(error.code)
-          console.log(error.message)
-        })
-    })
-  }
+  // async anonymousSignin () {
+  //   return new Promise((resolve, reject) => {
+  //     firebase.auth().signInAnonymously()
+  //       .then(() => {
+  //         resolve()
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error.code)
+  //         console.log(error.message)
+  //       })
+  //   })
+  // }
 
   /**
    * Set date to load commits from, if date is later
@@ -582,36 +589,36 @@ class Medusa extends mixin(EventEmitter, Component) {
     this.setState({ spherize: this.config.FDG.sphereProject })
   }
 
-  async initFireBase () {
-    // set firebase collection names
-    this.repo = this.config.git.repo
-    this.repoChanges = this.config.git.repo + '_changes'
-    this.repoFileInfo = this.config.git.repo + '_fileInfo'
+  // async initFireBase () {
+  //   // set firebase collection names
+  //   this.repo = this.config.git.repo
+  //   this.repoChanges = this.config.git.repo + '_changes'
+  //   this.repoFileInfo = this.config.git.repo + '_fileInfo'
 
-    try {
-      firebase.initializeApp(this.config.fireBase)
+  //   try {
+  //     firebase.initializeApp(this.config.fireBase)
 
-      firebase.firestore()
+  //     firebase.firestore()
 
-      if (this.config.useIndexedDB) {
-        this.firebaseDB = await firebase.firestore().enablePersistence()
-      } else {
-        this.firebaseDB = await firebase.firestore()
-      }
-    } catch (error) {
-      console.log(error)
-    }
+  //     if (this.config.useIndexedDB) {
+  //       this.firebaseDB = await firebase.firestore().enablePersistence()
+  //     } else {
+  //       this.firebaseDB = await firebase.firestore()
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
 
-    this.docRef = this.firebaseDB.collection(this.repo)
-    this.docRefChanges = this.firebaseDB.collection(this.repoChanges)
+  //   this.docRef = this.firebaseDB.collection(this.repo)
+  //   this.docRefChanges = this.firebaseDB.collection(this.repoChanges)
 
-    await this.anonymousSignin()
+  //   await this.anonymousSignin()
 
-    this.callAPI()
+  //   this.callAPI()
 
-    // send ready event
-    this.emit('ready')
-  }
+  //   // send ready event
+  //   this.emit('ready')
+  // }
 
   componentDidMount () {
     this.componentMounted = true
@@ -769,6 +776,28 @@ class Medusa extends mixin(EventEmitter, Component) {
       this.mousePos,
       this
     )
+
+    if (this.FDG) {
+      if (this.FDG.firstRun) {
+        this.FDG.init({
+          nodeData: this.nodesStatic,
+          edgeData: this.edgesStatic,
+          nodeCount: this.config.FDG.nodeCount
+        })
+        this.FDG.setFirstRun(false)
+        this.toggleSpherize()
+        setTimeout(() => {
+          this.toggleSpherize()
+        }, 1000)
+      } else {
+        this.FDG.refresh()
+        this.FDG.init({
+          nodeData: this.nodesStatic,
+          edgeData: this.edgesStatic,
+          nodeCount: this.config.FDG.nodeCount
+        })
+      }
+    }
   }
 
   animate () {
@@ -872,7 +901,7 @@ class Medusa extends mixin(EventEmitter, Component) {
     // this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false)
 
     this.on('ready', () => {
-      this.setDateRange()
+      // this.setDateRange()
     })
 
     this.on('nodeDeselect', function (data) {
@@ -1050,276 +1079,279 @@ class Medusa extends mixin(EventEmitter, Component) {
   /**
    * Get commit data
    */
-  async callAPI () {
-    // only call this method if tab in focus
-    let animID = this.callAPI
-    if (this.currentFrame === this.prevAPICallFrame) {
-      window.requestAnimationFrame(animID.bind(this))
-      return
-    } else {
-      window.cancelAnimationFrame(animID)
-    }
+  // async callAPI () {
+  //   // only call this method if tab in focus
+  //   let animID = this.callAPI
+  //   if (this.currentFrame === this.prevAPICallFrame) {
+  //     window.requestAnimationFrame(animID.bind(this))
+  //     return
+  //   } else {
+  //     window.cancelAnimationFrame(animID)
+  //   }
 
-    this.prevAPICallFrame = this.currentFrame
+  //   this.prevAPICallFrame = this.currentFrame
 
-    this.APIprocessing = true
-    let commits
+  //   this.APIprocessing = true
+  //   let commits
 
-    if (this.config.fireBase.useChangesDB) {
-      // only get changed data in play mode
-      if (this.state.play) {
-        this.docRef = this.firebaseDB.collection(this.repoChanges)
-      } else {
-        this.docRef = this.firebaseDB.collection(this.repo)
-      }
-    }
+  //   if (this.config.fireBase.useChangesDB) {
+  //     // only get changed data in play mode
+  //     if (this.state.play) {
+  //       this.docRef = this.firebaseDB.collection(this.repoChanges)
+  //     } else {
+  //       this.docRef = this.firebaseDB.collection(this.repo)
+  //     }
+  //   }
 
-    this.commitsToProcess = []
+  //   this.commitsToProcess = []
 
-    this.direction = ''
+  //   this.direction = ''
 
-    // load commit by hash
-    if (this.loadCommitHash !== '') {
-      commits = this.docRef.doc(this.loadCommitHash)
-    } else if (this.loadPrevCommit) { // load previous commit
-      commits = this.docRef.where('index', '==', this.state.currentCommitIndex - 1).limit(1)
-      this.direction = 'prev'
-    } else if (this.loadNextCommit) { // load next commit
-      commits = this.docRef.where('index', '==', this.state.currentCommitIndex + 1).limit(1)
-      this.direction = 'next'
-    } else if (this.config.git.loadLatest && !this.timestampToLoad) {
-      commits = this.docRef.orderBy('index', 'desc').limit(1)
-    } else if (this.timestampToLoad) {
-      commits = this.docRef.where('date', '>=', this.timestampToLoad).limit(1)
-    } else {
-      commits = this.docRef.where('index', '==', this.state.currentCommitIndex + 1).limit(1)
-      this.direction = 'next'
-    }
+  //   // load commit by hash
+  //   if (this.loadCommitHash !== '') {
+  //     commits = this.docRef.doc(this.loadCommitHash)
+  //   } else if (this.loadPrevCommit) { // load previous commit
+  //     commits = this.docRef.where('index', '==', this.state.currentCommitIndex - 1).limit(1)
+  //     this.direction = 'prev'
+  //   } else if (this.loadNextCommit) { // load next commit
+  //     commits = this.docRef.where('index', '==', this.state.currentCommitIndex + 1).limit(1)
+  //     this.direction = 'next'
+  //   } else if (this.config.git.loadLatest && !this.timestampToLoad) {
+  //     commits = this.docRef.orderBy('index', 'desc').limit(1)
+  //   } else if (this.timestampToLoad) {
+  //     commits = this.docRef.where('date', '>=', this.timestampToLoad).limit(1)
+  //   } else {
+  //     commits = this.docRef.where('index', '==', this.state.currentCommitIndex + 1).limit(1)
+  //     this.direction = 'next'
+  //   }
 
-    // reset flags
-    this.loadCommitHash = ''
-    this.loadPrevCommit = false
-    this.loadNextCommit = false
-    this.config.git.loadLatest = false
+  //   // reset flags
+  //   this.loadCommitHash = ''
+  //   this.loadPrevCommit = false
+  //   this.loadNextCommit = false
+  //   this.config.git.loadLatest = false
 
-    // collect snapshots
-    let snapshots = []
+  //   // collect snapshots
+  //   let snapshots = []
 
-    let snapshotOptions = {}
+  //   let snapshotOptions = {}
 
-    if (this.timestampToLoad) {
-      snapshotOptions.includeMetadataChanges = true
-    }
+  //   if (this.timestampToLoad) {
+  //     snapshotOptions.includeMetadataChanges = true
+  //   }
 
-    commits.onSnapshot(snapshotOptions,
-      async function (querySnapshot) {
-        // if loading from a particular date, disable local storage cache
-        if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
-          return
-        }
+  //   commits.onSnapshot(snapshotOptions,
+  //     async function (querySnapshot) {
+  //       // if loading from a particular date, disable local storage cache
+  //       if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
+  //         return
+  //       }
 
-        // no results found for this index, check for next/prev index in db
-        if (querySnapshot.size === 0) {
-          let commits = null
-          if (this.direction === 'prev') {
-            commits = this.docRef.where('index', '<', this.state.currentCommitIndex).orderBy('index', 'desc').limit(1)
-          } else {
-            commits = this.docRef.where('index', '>', this.state.currentCommitIndex).orderBy('index', 'asc').limit(1)
-          }
-          let snapshot = await commits.get()
-          if (snapshot.size !== 0) {
-            let commit = snapshot.docs[0].data()
-            if (this.direction === 'prev') {
-              this.setState({ currentCommitIndex: commit.index + 1 })
-              this.loadPrevCommit = true
-            } else {
-              this.setState({ currentCommitIndex: commit.index - 1 })
-              this.loadNextCommit = true
-            }
-            this.callAPI()
-          }
+  //       // no results found for this index, check for next/prev index in db
+  //       if (querySnapshot.size === 0) {
+  //         let commits = null
+  //         if (this.direction === 'prev') {
+  //           commits = this.docRef.where('index', '<', this.state.currentCommitIndex).orderBy('index', 'desc').limit(1)
+  //         } else {
+  //           commits = this.docRef.where('index', '>', this.state.currentCommitIndex).orderBy('index', 'asc').limit(1)
+  //         }
+  //         let snapshot = await commits.get()
+  //         if (snapshot.size !== 0) {
+  //           let commit = snapshot.docs[0].data()
+  //           if (this.direction === 'prev') {
+  //             this.setState({ currentCommitIndex: commit.index + 1 })
+  //             this.loadPrevCommit = true
+  //           } else {
+  //             this.setState({ currentCommitIndex: commit.index - 1 })
+  //             this.loadNextCommit = true
+  //           }
+  //           this.callAPI()
+  //         }
 
-          return
-        }
+  //         return
+  //       }
 
-        if (typeof querySnapshot.docs !== 'undefined') {
-          querySnapshot.forEach(snapshot => {
-            snapshots.push(snapshot)
-            this.commitsToProcess.push(snapshot.id)
-          })
-        } else {
-          snapshots.push(querySnapshot)
-          this.commitsToProcess.push(querySnapshot.id)
-        }
+  //       if (typeof querySnapshot.docs !== 'undefined') {
+  //         querySnapshot.forEach(snapshot => {
+  //           snapshots.push(snapshot)
+  //           this.commitsToProcess.push(snapshot.id)
+  //         })
+  //       } else {
+  //         snapshots.push(querySnapshot)
+  //         this.commitsToProcess.push(querySnapshot.id)
+  //       }
 
-        // if no results found for the passed date, load latest commit
-        if (this.timestampToLoad && snapshots.length === 0) {
-          commits = this.docRef.orderBy('index', 'desc').limit(1)
-          let snapshot = await commits.get()
-          snapshots.push(snapshot)
-          // if no newer results, check again in a minute
-        } else if (snapshots.length === 0) {
-          setTimeout(() => {
-            if (this.state.play) {
-              this.callAPI()
-            }
-          }, 60000)
-          return
-        }
+  //       // if no results found for the passed date, load latest commit
+  //       if (this.timestampToLoad && snapshots.length === 0) {
+  //         commits = this.docRef.orderBy('index', 'desc').limit(1)
+  //         let snapshot = await commits.get()
+  //         snapshots.push(snapshot)
+  //         // if no newer results, check again in a minute
+  //       } else if (snapshots.length === 0) {
+  //         setTimeout(() => {
+  //           if (this.state.play) {
+  //             this.callAPI()
+  //           }
+  //         }, 60000)
+  //         return
+  //       }
 
-        const addCommits = async () => {
-          await this.asyncForEach(snapshots, async (snapshot) => {
-            await this.updateGraph(snapshot)
-          })
-          this.APIprocessing = false
-          this.callAPI()
-        }
-        addCommits()
-      }.bind(this), function (error) {
-        console.log(error)
-      })
-  }
+  //       const addCommits = async () => {
+  //         await this.asyncForEach(snapshots, async (snapshot) => {
+  //           await this.updateGraph(snapshot)
+  //         })
+  //         this.APIprocessing = false
+  //         this.callAPI()
+  //       }
+  //       addCommits()
+  //     }.bind(this), function (error) {
+  //       console.log(error)
+  //     })
+  // }
 
-  async updateGraph (doc) {
-    return new Promise((resolve) => {
-      if (!doc.exists) {
-        console.log('Error: Commit ' + doc.id + ' does not exist in repo')
-        resolve()
-      }
-      let commit = doc.data()
-      commit.sha = doc.id
+  // async updateGraph (doc) {
+  //   return new Promise((resolve) => {
+  //     if (!doc.exists) {
+  //       console.log('Error: Commit ' + doc.id + ' does not exist in repo')
+  //       resolve()
+  //     }
+  //     let commit = doc.data()
+  //     commit.sha = doc.id
 
-      if (this.commitsToProcess.indexOf(doc.id) === -1) {
-        resolve()
-      }
+  //     // console.log(JSON.parse(commit.nodes))
+  //     // console.log(commit.edges)
 
-      setTimeout(() => {
-        this.edges = JSON.parse(commit.edges)
+  //     if (this.commitsToProcess.indexOf(doc.id) === -1) {
+  //       resolve()
+  //     }
 
-        if (doc.ref.parent.id === this.repo) {
-          this.nodes = JSON.parse(commit.nodes)[0]
-        } else {
-          let nodeChanges = JSON.parse(commit.changes)
-          nodeChanges.r.forEach((path) => {
-            for (const key in this.nodes) {
-              if (this.nodes.hasOwnProperty(key)) {
-                const node = this.nodes[key]
-                if (node.p === path) {
-                  delete this.nodes[key]
-                }
-              }
-            }
-          })
+  //     setTimeout(() => {
+  //       this.edges = JSON.parse(commit.edges)
 
-          for (const id in this.nodes) {
-            if (this.nodes.hasOwnProperty(id)) {
-              if (nodeChanges.c.indexOf(this.nodes[id].p) !== -1) {
-                this.nodes[id].u = 1.0
-              } else {
-                delete this.nodes[id].u
-              }
-            }
-          }
+  //       if (doc.ref.parent.id === this.repo) {
+  //         this.nodes = JSON.parse(commit.nodes)[0]
+  //       } else {
+  //         let nodeChanges = JSON.parse(commit.changes)
+  //         nodeChanges.r.forEach((path) => {
+  //           for (const key in this.nodes) {
+  //             if (this.nodes.hasOwnProperty(key)) {
+  //               const node = this.nodes[key]
+  //               if (node.p === path) {
+  //                 delete this.nodes[key]
+  //               }
+  //             }
+  //           }
+  //         })
 
-          for (const newIndex in nodeChanges.i) {
-            if (nodeChanges.i.hasOwnProperty(newIndex)) {
-              const newNode = nodeChanges.i[newIndex]
+  //         for (const id in this.nodes) {
+  //           if (this.nodes.hasOwnProperty(id)) {
+  //             if (nodeChanges.c.indexOf(this.nodes[id].p) !== -1) {
+  //               this.nodes[id].u = 1.0
+  //             } else {
+  //               delete this.nodes[id].u
+  //             }
+  //           }
+  //         }
 
-              for (const key in this.nodes) {
-                if (this.nodes.hasOwnProperty(key)) {
-                  const oldNode = this.nodes[key]
-                  if (oldNode.p === newNode.p) {
-                    delete this.nodes[key]
-                  }
-                }
-              }
+  //         for (const newIndex in nodeChanges.i) {
+  //           if (nodeChanges.i.hasOwnProperty(newIndex)) {
+  //             const newNode = nodeChanges.i[newIndex]
 
-              this.nodes[newIndex] = newNode
-            }
-          }
+  //             for (const key in this.nodes) {
+  //               if (this.nodes.hasOwnProperty(key)) {
+  //                 const oldNode = this.nodes[key]
+  //                 if (oldNode.p === newNode.p) {
+  //                   delete this.nodes[key]
+  //                 }
+  //               }
+  //             }
 
-          for (const key in nodeChanges.a) {
-            if (nodeChanges.a.hasOwnProperty(key)) {
-              const node = nodeChanges.a[key]
-              node.u = 1.0
-              this.nodes[key] = node
-            }
-          }
-        }
+  //             this.nodes[newIndex] = newNode
+  //           }
+  //         }
 
-        let changedState = {}
+  //         for (const key in nodeChanges.a) {
+  //           if (nodeChanges.a.hasOwnProperty(key)) {
+  //             const node = nodeChanges.a[key]
+  //             node.u = 1.0
+  //             this.nodes[key] = node
+  //           }
+  //         }
+  //       }
 
-        this.timestampToLoad = 0
-        changedState.currentCommit = commit
-        changedState.currentDate = moment.unix(commit.date / 1000).locale(langLocales[this.config.lang]).format('MM/DD/YYYY HH:mm:ss')
-        changedState.currentDateObject = moment(moment.unix(commit.date / 1000))
-        changedState.committerDate = commit.committerDate ? moment.unix(commit.committerDate / 1000).locale(langLocales[this.config.lang]).format('MM/DD/YYYY HH:mm:ss') : changedState.currentDate
-        changedState.currentCommitHash = commit.sha
-        changedState.currentAuthor = commit.author + ' <' + commit.email + '>'
-        changedState.currentMsg = commit.msg
+  //       let changedState = {}
 
-        let changes
-        if (!commit.changeDetail) {
-          changes = JSON.parse(commit.changes)
-          changedState.currentAdded = isNaN(changes.a) ? Object.keys(changes.a).length : changes.a
-          changedState.currentChanged = isNaN(changes.c) ? changes.c.length : changes.c
-          changedState.currentRemoved = isNaN(changes.r) ? changes.r.length : changes.r
-        } else {
-          changes = JSON.parse(commit.changeDetail)
-          changedState.currentAdded = changes.a
-          changedState.currentChanged = changes.c + changes.rn
-          changedState.currentRemoved = changes.r
-        }
+  //       this.timestampToLoad = 0
+  //       changedState.currentCommit = commit
+  //       changedState.currentDate = moment.unix(commit.date / 1000).locale(langLocales[this.config.lang]).format('MM/DD/YYYY HH:mm:ss')
+  //       changedState.currentDateObject = moment(moment.unix(commit.date / 1000))
+  //       changedState.committerDate = commit.committerDate ? moment.unix(commit.committerDate / 1000).locale(langLocales[this.config.lang]).format('MM/DD/YYYY HH:mm:ss') : changedState.currentDate
+  //       changedState.currentCommitHash = commit.sha
+  //       changedState.currentAuthor = commit.author + ' <' + commit.email + '>'
+  //       changedState.currentMsg = commit.msg
 
-        changedState.currentCommitIndex = commit.index
+  //       let changes
+  //       if (!commit.changeDetail) {
+  //         changes = JSON.parse(commit.changes)
+  //         changedState.currentAdded = isNaN(changes.a) ? Object.keys(changes.a).length : changes.a
+  //         changedState.currentChanged = isNaN(changes.c) ? changes.c.length : changes.c
+  //         changedState.currentRemoved = isNaN(changes.r) ? changes.r.length : changes.r
+  //       } else {
+  //         changes = JSON.parse(commit.changeDetail)
+  //         changedState.currentAdded = changes.a
+  //         changedState.currentChanged = changes.c + changes.rn
+  //         changedState.currentRemoved = changes.r
+  //       }
 
-        this.cameraAccommodateNodes()
+  //       changedState.currentCommitIndex = commit.index
 
-        if (this.FDG) {
-          if (this.FDG.firstRun) {
-            this.FDG.init({
-              nodeData: this.nodes,
-              edgeData: this.edges,
-              nodeCount: this.config.FDG.nodeCount
-            })
-            this.FDG.setFirstRun(false)
-            this.toggleSpherize()
-            setTimeout(() => {
-              this.toggleSpherize()
-            }, 1000)
-          } else {
-            this.FDG.refresh()
-            this.FDG.init({
-              nodeData: this.nodes,
-              edgeData: this.edges,
-              nodeCount: this.config.FDG.nodeCount
-            })
-          }
-        }
+  //       this.cameraAccommodateNodes()
 
-        // this.populateSideBar(changedState.currentCommitIndex)
+  //       if (this.FDG) {
+  //         if (this.FDG.firstRun) {
+  //           this.FDG.init({
+  //             nodeData: this.nodesStatic,
+  //             edgeData: this.edgesStatic,
+  //             nodeCount: this.config.FDG.nodeCount
+  //           })
+  //           this.FDG.setFirstRun(false)
+  //           this.toggleSpherize()
+  //           setTimeout(() => {
+  //             this.toggleSpherize()
+  //           }, 1000)
+  //         } else {
+  //           this.FDG.refresh()
+  //           this.FDG.init({
+  //             nodeData: this.nodesStatic,
+  //             edgeData: this.edgesStatic,
+  //             nodeCount: this.config.FDG.nodeCount
+  //           })
+  //         }
+  //       }
 
-        this.setState(changedState)
+  //       // this.populateSideBar(changedState.currentCommitIndex)
 
-        this.emit('commitChanged', {
-          removed: changedState.currentRemoved,
-          changed: changedState.currentChanged,
-          added: changedState.currentAdded,
-          msg: changedState.currentMsg,
-          author: changedState.currentAuthor,
-          hash: changedState.currentCommitHash,
-          date: changedState.currentDate,
-          index: commit.index
-        })
+  //       this.setState(changedState)
 
-        if (this.state.play) {
-          resolve()
-        } else {
-          this.APIprocessing = false
-        }
-      }, this.config.FDG.delayAmount)
-    })
-  }
+  //       this.emit('commitChanged', {
+  //         removed: changedState.currentRemoved,
+  //         changed: changedState.currentChanged,
+  //         added: changedState.currentAdded,
+  //         msg: changedState.currentMsg,
+  //         author: changedState.currentAuthor,
+  //         hash: changedState.currentCommitHash,
+  //         date: changedState.currentDate,
+  //         index: commit.index
+  //       })
+
+  //       if (this.state.play) {
+  //         resolve()
+  //       } else {
+  //         this.APIprocessing = false
+  //       }
+  //     }, this.config.FDG.delayAmount)
+  //   })
+  // }
 
   async asyncForEach (array, callback) {
     for (let index = 0; index < array.length; index++) {
