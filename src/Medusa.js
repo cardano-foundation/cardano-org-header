@@ -299,13 +299,13 @@ import { edges } from './data/edges'
 class Medusa extends mixin(EventEmitter, Component) {
   constructor (props) {
     super(props)
+    this.config = Config
 
     this.nodesStatic = nodes[0]
+    this.config.FDG.nodeCount = this.nodesStatic.length
     this.edgesStatic = edges
 
     this.containerRef = React.createRef()
-
-    this.config = deepAssign(Config, this.props.config)
 
     this.clock = new Clock()
 
@@ -621,8 +621,23 @@ class Medusa extends mixin(EventEmitter, Component) {
   // }
 
   componentDidMount () {
+    this.config.FDG.colorPalette = this.props.colorPalette
+    this.config.theme = this.props.theme
+
+    if (this.props.camPosZ) {
+      this.config.camera.initPos.z = this.props.camPosZ
+    }
+
     this.componentMounted = true
     this.initStage()
+  }
+
+  componentDidUpdate (prevProps) {
+    this.config.theme = this.props.theme
+  }
+
+  componentWillUnmount () {
+    this.destroy()
   }
 
   initStage () {
@@ -706,8 +721,8 @@ class Medusa extends mixin(EventEmitter, Component) {
 
       this.bokehPass = new BokehPass(this.bokehScene, this.camera, {
         focus: 768,
-        aperture: 0.0000095,
-        maxblur: 0.01,
+        aperture: 0.0000099,
+        maxblur: 0.0098,
         width: window.innerWidth,
         height: window.innerHeight
       }, this.bokehSceneMat)
@@ -801,13 +816,13 @@ class Medusa extends mixin(EventEmitter, Component) {
   }
 
   animate () {
-    window.requestAnimationFrame(this.animate.bind(this))
+    this.animationReq = window.requestAnimationFrame(this.animate.bind(this))
     this.renderFrame()
   }
 
   renderFrame () {
     if (!this.running) {
-      window.cancelAnimationFrame(this.animate)
+      window.cancelAnimationFrame(this.animationReq)
       return
     }
 
@@ -1591,7 +1606,9 @@ class Medusa extends mixin(EventEmitter, Component) {
     delete this.controls
     delete this.FDG
 
-    window.cancelAnimationFrame(this.animate)
+    window.removeEventListener('resize', this.resize)
+
+    window.cancelAnimationFrame(this.animationReq)
     this.running = false
   }
 
@@ -1829,7 +1846,10 @@ class Medusa extends mixin(EventEmitter, Component) {
 }
 
 Medusa.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  colorPalette: PropTypes.array,
+  theme: PropTypes.string,
+  camPosZ: PropTypes.number
 }
 
 export default Medusa

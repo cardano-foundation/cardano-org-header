@@ -32,7 +32,17 @@ class App extends Component {
     if (this.enabled) {
       return (
         <div>
-          <Medusa className='medusa-container' ref='demo' />
+          <Medusa
+            theme='dark'
+            className='medusa-container'
+            camPosZ={600}
+            colorPalette={[
+              '#ff5454',
+              '#3b7882',
+              '#ffffff'
+            ]}
+            ref='demo'
+          />
         </div>
       )
     }

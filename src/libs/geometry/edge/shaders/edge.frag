@@ -1,8 +1,11 @@
 uniform float cycleColors;
+uniform float theme;
+uniform float uBokeh;
 
 varying float vAlpha;
 varying float vUpdated;
 varying vec4 vCurrentPosition;
+varying vec4 vMvPosition;
 
 uniform float backSideOnly;
 uniform float frontSideOnly;
@@ -11,11 +14,18 @@ varying vec3 vCamPos;
 void main(){
 
     vec3 color = vec3(0.);
+    if (theme == 1.0) {
+      color = vec3(1.);
+    }
 
     float a = vAlpha;
     float distToCenter = length(vCurrentPosition.xyz);
-    a *= pow(distToCenter, 2.0) * 0.000008;
-    //a *= pow(distToCenter, 2.0) * 0.000055;
+    if (uBokeh == 1.0) {
+      a *= pow(distToCenter, 2.0) * 0.000009;
+    } else {
+      a *= pow(distToCenter, 2.0) * 0.0000048;
+    }
+    a *= (15000.0 / length(vMvPosition.xyz)) * 0.06;
 
     vec3 newCamPos = vCamPos - (normalize(vCamPos) * 600.0);
     float distToCamPos = distance(vCurrentPosition.xyz, newCamPos);

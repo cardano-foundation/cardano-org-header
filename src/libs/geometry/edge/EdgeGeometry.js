@@ -70,6 +70,10 @@ export default class EdgeGeometry {
     if (!this.material) {
       this.material = new ShaderMaterial({
         uniforms: {
+          theme: {
+            type: 'f',
+            value: 0 // 0 = light, 1 = dark
+          },
           camDistToCenter: {
             type: 'f',
             value: null
@@ -101,6 +105,10 @@ export default class EdgeGeometry {
           uCamPosZOffset: {
             type: 'f',
             value: 150
+          },
+          uBokeh: {
+            type: 'f',
+            value: 0.0
           }
         },
         transparent: true,
@@ -126,5 +134,9 @@ export default class EdgeGeometry {
     this.material.uniforms.camPos.value = camPos
 
     this.material.uniforms.uCamPosZOffset.value = this.config.FDG.focusPlaneOffset
+
+    this.material.uniforms.theme.value = this.config.theme === 'light' ? 0 : 1
+
+    this.material.uniforms.uBokeh.value = this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3' ? 1 : 0
   }
 }

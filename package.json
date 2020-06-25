@@ -1,6 +1,6 @@
 {
   "name": "cardano-org-header",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "3D WebGL Git Repository Visualization",
   "author": "Scott Darby <scott.darby@iohk.io>",
   "homepage": "https://input-output-hk.github.io/cardano-org-header/",
@@ -25,7 +25,7 @@
     "dev:demo": "webpack-dev-server --config webpack_demo.config.js --open"
   },
   "peerDependencies": {
-    "react": "^16.8"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -58,7 +58,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^4.2.0",
-    "gh-pages": "^2.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
@@ -79,34 +78,17 @@
     "webpack": "^4.35.2",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.8.0"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^3.8.0",
     "@babel/runtime": "^7.10.3",
-    "bootstrap": "^4.1.3",
     "deep-assign": "^3.0.0",
     "detect-gpu": "^1.3.0",
-    "firebase": "^7.15.4",
     "glsl-blend": "^1.0.3",
     "glsl-noise": "^0.0.0",
     "glslify-loader": "^2.0.0",
     "gsap": "^3.2.4",
     "mixin": "^0.2.0",
-    "moment": "^2.27.0",
-    "promise": "^8.0.3",
-    "raw-loader": "^3.1.0",
-    "rc-slider": "^9.3.1",
-    "react-datepicker": "^3.0.0",
-    "react-fontawesome": "^1.6.1",
-    "react-icons": "^3.1.0",
-    "react-inlinesvg": "^0.8.4",
-    "react-media": "^1.9.2",
-    "react-render-html": "^0.6.0",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^5.2.0",
-    "react-select": "^2.1.1",
-    "sass-loader": "^7.1.0",
-    "scss": "^0.2.4",
-    "simple-line-icons": "^2.4.1"
+    "raw-loader": "^3.1.0"
+  },
+  "dependencies": {
   }
 }

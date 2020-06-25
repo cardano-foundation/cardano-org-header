@@ -114,7 +114,7 @@ export default class NodeGeometry {
           dirNumber += dir[charIndex].charCodeAt(0)
         }
 
-        let dirIdentifier = dirNumber % (this.config.FDG.colorPalette.length - 1)
+        let dirIdentifier = dirNumber % (this.config.FDG.colorPalette.length)
 
         let nodeColor = this.config.FDG.colorPalette[dirIdentifier]
 
@@ -242,6 +242,11 @@ export default class NodeGeometry {
         value: 150.0
       }
 
+      uniforms.uBokeh = {
+        type: 'f',
+        value: 0.0
+      }
+
       this.material = new ShaderMaterial({
         uniforms: uniforms,
         transparent: true,
@@ -302,5 +307,7 @@ export default class NodeGeometry {
     this.material.uniforms.camPos.value = camPos
 
     this.material.uniforms.uCamPosZOffset.value = this.config.FDG.focusPlaneOffset
+
+    this.material.uniforms.uBokeh.value = this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3' ? 1 : 0
   }
 }

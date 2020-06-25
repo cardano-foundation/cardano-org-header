@@ -5,6 +5,7 @@ uniform float uTime;
 uniform float backSideOnly;
 uniform float frontSideOnly;
 uniform float uCamPosZOffset;
+uniform float theme;
 
 attribute float updated;
 attribute vec2 texLocation;
@@ -12,10 +13,12 @@ attribute vec2 texLocation;
 varying float vAlpha;
 varying float vUpdated;
 varying vec4 vCurrentPosition;
+varying vec4 vMvPosition;
 varying float vBackside;
 varying float vBackSideOnly;
 varying float vFrontSideOnly;
 varying vec3 vCamPos;
+varying float vDist;
 
 float map(float value, float inMin, float inMax, float outMin, float outMax) {
   return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
@@ -37,6 +40,8 @@ void main() {
 
     vec4 mvPosition = modelViewMatrix * currentPosition;
 
+    vMvPosition = mvPosition;
+
     // vAlpha = 2000.0 / dot(mvPosition.xyz, mvPosition.xyz);
     vAlpha = 0.18;
 
@@ -55,15 +60,11 @@ void main() {
     vec3 newCamPos = camPos - (normalize(camPos) * 600.0);
     float distToCamPos = distance(currentPosition.xyz, newCamPos);
 
-    vBackside = 1.0;
-    if (dot( currentPosition.xyz - normalize(camPos) * uCamPosZOffset, normalize(camPos) ) > 0.0) {
-      vBackside = 0.0;
-    }
-
-    vBackSideOnly = backSideOnly;
-    vFrontSideOnly = frontSideOnly;
-
-
+    // vBackside = 1.0;
+    // if (dot( currentPosition.xyz - normalize(camPos) * uCamPosZOffset, normalize(camPos) ) > 0.0) {
+    //   vBackside = 0.0;
+    // }
   
-  gl_Position = projectionMatrix * mvPosition;
+    gl_Position = projectionMatrix * mvPosition;
+
 }
