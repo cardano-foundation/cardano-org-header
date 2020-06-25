@@ -2,7 +2,6 @@ import { Vector3 } from 'three/src/math/Vector3'
 import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
 import { BufferAttribute } from 'three/src/core/BufferAttribute'
 import { BufferGeometry } from 'three/src/core/BufferGeometry'
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Color } from 'three/src/math/Color'
 import { Points } from 'three/src/objects/Points'
 import { ShaderLib } from 'three/src/renderers/shaders/ShaderLib'
@@ -17,9 +16,9 @@ import PickFragmentShader from './shaders/pick.frag'
 // import DepthFragmentShader from './shaders/depth.frag'
 
 // images
-import spriteFile from '../../../assets/images/dot.png'
-import spriteBlurFile from '../../../assets/images/dot-blur.png'
-import spriteUpdatedFile from '../../../assets/images/dot-concentric.png'
+// import spriteFile from '../../../assets/images/dot.png'
+// import spriteBlurFile from '../../../assets/images/dot-blur.png'
+// import spriteUpdatedFile from '../../../assets/images/dot-concentric.png'
 
 export default class NodeGeometry {
   constructor (config) {
@@ -27,9 +26,9 @@ export default class NodeGeometry {
     this.nodeCount = config.FDG.nodeCount
     this.textureHelper = new TextureHelper()
 
-    this.sprite = new TextureLoader().load(spriteFile)
-    this.spriteBlur = new TextureLoader().load(spriteBlurFile)
-    this.uSprite = new TextureLoader().load(spriteUpdatedFile)
+    // this.sprite = new TextureLoader().load(spriteFile)
+    // this.spriteBlur = new TextureLoader().load(spriteBlurFile)
+    // this.uSprite = new TextureLoader().load(spriteUpdatedFile)
     this.decayTime = 0.0
     this.material = null
     this.pickingMaterial = null
