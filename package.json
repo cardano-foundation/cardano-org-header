@@ -17,15 +17,9 @@
     ]
   },
   "scripts": {
-    "build": "npm run build:js",
-    "build:demo": "webpack --config webpack_demo.prod.config.js",
-    "build:js": "webpack --config webpack.prod.config.js",
-    "deploy:demo": "./scripts/deploy_demo.sh",
-    "lint": "eslint src/**/*.js demo/src/**/*.js",
-    "prepublish": "npm run build",
-    "prepublishOnly": "npm run lint",
     "dev:demo": "webpack-dev-server --config webpack_demo.config.js --open",
-    "watch:js": "npm run build:js -- --watch"
+    "build:demo": "webpack --config webpack_demo.prod.config.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "peerDependencies": {
     "react": "^16.8"
@@ -80,6 +74,7 @@
     "three": "^0.117.1",
     "url-loader": "^2.2.0",
     "webpack": "^4.35.2",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.8.0"
   },
@@ -95,7 +90,6 @@
     "gsap": "^3.2.4",
     "mixin": "^0.2.0",
     "moment": "^2.27.0",
-    "node-sass": "^4.9.3",
     "promise": "^8.0.3",
     "raw-loader": "^3.1.0",
     "rc-slider": "^9.3.1",
@@ -110,7 +104,6 @@
     "react-select": "^2.1.1",
     "sass-loader": "^7.1.0",
     "scss": "^0.2.4",
-    "simple-line-icons": "^2.4.1",
-    "tween.js": "^16.6.0"
+    "simple-line-icons": "^2.4.1"
   }
 }

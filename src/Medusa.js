@@ -19,13 +19,13 @@ import {
   CustomBlending
 } from 'three'
 
-import * as dat from 'dat.gui'
+// import * as dat from 'dat.gui'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import deepAssign from 'deep-assign'
 import EventEmitter from 'eventemitter3'
 import mixin from 'mixin'
-import moment, { relativeTimeThreshold } from 'moment'
+import moment from 'moment'
 import 'moment/locale/ja'
 import 'moment/locale/zh-cn'
 import 'moment/locale/ko'
@@ -34,12 +34,12 @@ import 'moment/locale/en-gb'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import MD5 from './libs/MD5'
-import Media from 'react-media'
+// import MD5 from './libs/MD5'
+// import Media from 'react-media'
 
-import {
-  BrowserRouter
-} from 'react-router-dom'
+// import {
+//   BrowserRouter
+// } from 'react-router-dom'
 
 import VertexShader from './libs/geometry/node/shaders/node.vert'
 import DepthFragShader from './libs/geometry/node/shaders/depth.frag'
@@ -58,35 +58,35 @@ import Config from './Config'
 import FDG from './libs/FDG'
 
 // Components
-import FileInfo from './components/FileInfo'
-import CommitList from './components/CommitList'
-import Controls from './components/Controls'
-import Sidebar from './components/Sidebar'
-import Calendar from './components/Calendar'
-import Legend from './components/Legend'
-import Content from './components/Content'
-import Head from './components/Head'
-import About from './components/About'
-import Widget from './components/Widget'
-import DatePicker from 'react-datepicker'
+// import FileInfo from './components/FileInfo'
+// import CommitList from './components/CommitList'
+// import Controls from './components/Controls'
+// import Sidebar from './components/Sidebar'
+// import Calendar from './components/Calendar'
+// import Legend from './components/Legend'
+// import Content from './components/Content'
+// import Head from './components/Head'
+// import About from './components/About'
+// import Widget from './components/Widget'
+// import DatePicker from 'react-datepicker'
 
-import Smallogo from './style/images/logo-xs.svg'
+// import Smallogo from './style/images/logo-xs.svg'
 
 // Slider
-import Slider, { createSliderWithTooltip } from 'rc-slider'
+// import Slider, { createSliderWithTooltip } from 'rc-slider'
 
-import SVG from 'react-inlinesvg'
+// import SVG from 'react-inlinesvg'
 
-import FullscreenCloseImg from './style/images/close-fullscreen.svg'
-import IconCalendar from './style/images/control-calendar.svg'
-import IconPlay from './style/images/control-play.svg'
-import IconPause from './style/images/control-pause.svg'
-import IconPrev from './style/images/control-prev.svg'
-import IconNext from './style/images/control-next.svg'
-import IconClock from './style/images/icon-clock.svg'
-import IconInfo from './style/images/icon-info-circle.svg'
+// import FullscreenCloseImg from './style/images/close-fullscreen.svg'
+// import IconCalendar from './style/images/control-calendar.svg'
+// import IconPlay from './style/images/control-play.svg'
+// import IconPause from './style/images/control-pause.svg'
+// import IconPrev from './style/images/control-prev.svg'
+// import IconNext from './style/images/control-next.svg'
+// import IconClock from './style/images/icon-clock.svg'
+// import IconInfo from './style/images/icon-info-circle.svg'
 
-const SliderWithTooltip = createSliderWithTooltip(Slider)
+// const SliderWithTooltip = createSliderWithTooltip(Slider)
 
 const UIlabels = {
   en: {
@@ -289,9 +289,9 @@ const langLocales = {
   en: 'en-gb'
 }
 
-function dateSliderTooltipFormatter (v) {
-  return `${moment(v).format('DD.MM.YYYY')}`
-}
+// function dateSliderTooltipFormatter (v) {
+//   return `${moment(v).format('DD.MM.YYYY')}`
+// }
 
 class Medusa extends mixin(EventEmitter, Component) {
   constructor (props) {
@@ -843,32 +843,32 @@ class Medusa extends mixin(EventEmitter, Component) {
     window.addEventListener('resize', this.resize.bind(this), false)
     this.resize()
 
-    this.canvas.addEventListener('touchstart', (e) => {
-      // timeout.call(this)
-    })
+    // this.canvas.addEventListener('touchstart', (e) => {
+    //   // timeout.call(this)
+    // })
 
-    this.canvas.addEventListener('mousedown', (e) => {
-      // timeout.call(this)
-      // if (this.FDG && this.FDG.enabled) {
-      //   this.FDG.onMouseDown()
-      // }
-    })
+    // this.canvas.addEventListener('mousedown', (e) => {
+    //   // timeout.call(this)
+    //   // if (this.FDG && this.FDG.enabled) {
+    //   //   this.FDG.onMouseDown()
+    //   // }
+    // })
 
-    this.canvas.addEventListener('mouseup', (e) => {
-      if (this.FDG && this.FDG.enabled) {
-        this.FDG.onMouseUp()
-      }
-    })
+    // this.canvas.addEventListener('mouseup', (e) => {
+    //   if (this.FDG && this.FDG.enabled) {
+    //     this.FDG.onMouseUp()
+    //   }
+    // })
 
-    this.canvas.addEventListener('wheel', (e) => {
-      // timeout.call(this)
-    })
+    // this.canvas.addEventListener('wheel', (e) => {
+    //   // timeout.call(this)
+    // })
 
-    this.canvas.addEventListener('mousewheel', (e) => {
-      // timeout.call(this)
-    })
+    // this.canvas.addEventListener('mousewheel', (e) => {
+    //   // timeout.call(this)
+    // })
 
-    this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false)
+    // this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false)
 
     this.on('ready', () => {
       this.setDateRange()
@@ -1303,7 +1303,7 @@ class Medusa extends mixin(EventEmitter, Component) {
           }
         }
 
-        this.populateSideBar(changedState.currentCommitIndex)
+        // this.populateSideBar(changedState.currentCommitIndex)
 
         this.setState(changedState)
 
@@ -1362,63 +1362,63 @@ class Medusa extends mixin(EventEmitter, Component) {
    * @param {string} email
    * @param {int} size
    */
-  getGravatar (email, size) {
-    return 'https://secure.gravatar.com/avatar/' + MD5(email) + '.jpg?s=' + size
-  }
+  // getGravatar (email, size) {
+  //   return 'https://secure.gravatar.com/avatar/' + MD5(email) + '.jpg?s=' + size
+  // }
 
-  async populateSideBar (currentCommitIndex) {
-    if (!this.state.showSidebar) {
-      return
-    }
+  // async populateSideBar (currentCommitIndex) {
+  //   if (!this.state.showSidebar) {
+  //     return
+  //   }
 
-    let commitsAbove = this.docRef.orderBy('index', 'asc').where('index', '>', currentCommitIndex).limit(this.config.display.sidebarCommitLimit)
-    let commitsBelow = this.docRef.orderBy('index', 'desc').where('index', '<', currentCommitIndex).limit(this.config.display.sidebarCommitLimit)
+  //   let commitsAbove = this.docRef.orderBy('index', 'asc').where('index', '>', currentCommitIndex).limit(this.config.display.sidebarCommitLimit)
+  //   let commitsBelow = this.docRef.orderBy('index', 'desc').where('index', '<', currentCommitIndex).limit(this.config.display.sidebarCommitLimit)
 
-    let snapshotOptions = {}
-    if (this.timestampToLoad) {
-      snapshotOptions.includeMetadataChanges = true
-    }
+  //   let snapshotOptions = {}
+  //   if (this.timestampToLoad) {
+  //     snapshotOptions.includeMetadataChanges = true
+  //   }
 
-    commitsAbove.onSnapshot(snapshotOptions, function (querySnapshot) {
-      if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
-        return
-      }
+  //   commitsAbove.onSnapshot(snapshotOptions, function (querySnapshot) {
+  //     if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
+  //       return
+  //     }
 
-      this.commitsAboveArr = []
+  //     this.commitsAboveArr = []
 
-      querySnapshot.forEach(snapshot => {
-        let data = snapshot.data()
-        data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('dddd, MMMM Do YYYY, h:mm:ss a')
-        data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
-        data.sha = snapshot.id
-        data.gravatar = this.getGravatar(data.email, 40)
-        this.commitsAboveArr.push(data)
-      })
+  //     querySnapshot.forEach(snapshot => {
+  //       let data = snapshot.data()
+  //       data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('dddd, MMMM Do YYYY, h:mm:ss a')
+  //       data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
+  //       data.sha = snapshot.id
+  //       data.gravatar = this.getGravatar(data.email, 40)
+  //       this.commitsAboveArr.push(data)
+  //     })
 
-      commitsBelow.onSnapshot(function (querySnapshot) {
-        if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
-          return
-        }
+  //     commitsBelow.onSnapshot(function (querySnapshot) {
+  //       if (this.timestampToLoad && querySnapshot.metadata.fromCache) {
+  //         return
+  //       }
 
-        this.commitsBelowArr = []
-        querySnapshot.forEach(snapshot => {
-          let data = snapshot.data()
+  //       this.commitsBelowArr = []
+  //       querySnapshot.forEach(snapshot => {
+  //         let data = snapshot.data()
 
-          data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('ddd, MMM Do YYYY, h:mm:ss a')
-          data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
-          data.sha = snapshot.id
-          data.gravatar = this.getGravatar(data.email, 40)
-          this.commitsBelowArr.push(data)
-        })
+  //         data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('ddd, MMM Do YYYY, h:mm:ss a')
+  //         data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
+  //         data.sha = snapshot.id
+  //         data.gravatar = this.getGravatar(data.email, 40)
+  //         this.commitsBelowArr.push(data)
+  //       })
 
-        this.sortCommitsSidebar(currentCommitIndex)
-      }.bind(this), function (error) {
-        console.log(error)
-      })
-    }.bind(this), function (error) {
-      console.log(error)
-    })
-  }
+  //       this.sortCommitsSidebar(currentCommitIndex)
+  //     }.bind(this), function (error) {
+  //       console.log(error)
+  //     })
+  //   }.bind(this), function (error) {
+  //     console.log(error)
+  //   })
+  // }
 
   sortCommitsSidebar (currentCommitIndex) {
     if (typeof this.commitsAboveArr === 'undefined' || typeof this.commitsBelowArr === 'undefined') {
@@ -1593,196 +1593,196 @@ class Medusa extends mixin(EventEmitter, Component) {
     return lastCommit
   }
 
-  onDateSliderChange (timestamp) {
-    this.setState({
-      currentDateObject: moment(timestamp)
-    })
-  }
+  // onDateSliderChange (timestamp) {
+  //   this.setState({
+  //     currentDateObject: moment(timestamp)
+  //   })
+  // }
 
-  playPauseButton () {
-    if (this.state.play) {
-      return (
-        <button onClick={() => { this.setPlay(false) }} className='playpause border-0 bg-transparent text-primary'><SVG src={IconPause} /></button>
-      )
-    } else {
-      return (
-        <button onClick={() => { this.setPlay(true) }} className='playpause border-0 bg-transparent text-primary'><SVG src={IconPlay} /></button>
-      )
-    }
-  }
+  // playPauseButton () {
+  //   if (this.state.play) {
+  //     return (
+  //       <button onClick={() => { this.setPlay(false) }} className='playpause border-0 bg-transparent text-primary'><SVG src={IconPause} /></button>
+  //     )
+  //   } else {
+  //     return (
+  //       <button onClick={() => { this.setPlay(true) }} className='playpause border-0 bg-transparent text-primary'><SVG src={IconPlay} /></button>
+  //     )
+  //   }
+  // }
 
-  closeFullscreen () {
-    this.setConfig(this.fullScreenConfig.close)
-    if (typeof URLSearchParams !== 'undefined') {
-      let urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.has('medusa')) {
-        window.history.replaceState({}, '', '/')
-      }
-    }
-  }
+  // closeFullscreen () {
+  //   this.setConfig(this.fullScreenConfig.close)
+  //   if (typeof URLSearchParams !== 'undefined') {
+  //     let urlParams = new URLSearchParams(window.location.search)
+  //     if (urlParams.has('medusa')) {
+  //       window.history.replaceState({}, '', '/')
+  //     }
+  //   }
+  // }
 
-  closeFullscreenButton () {
-    if (this.config.display.showClose) {
-      return (
-        <button ref='btn' onClick={this.closeFullscreen.bind(this)} className='close-fullscreen'><img src={FullscreenCloseImg} alt='' /></button>
-      )
-    }
-  }
+  // closeFullscreenButton () {
+  //   if (this.config.display.showClose) {
+  //     return (
+  //       <button ref='btn' onClick={this.closeFullscreen.bind(this)} className='close-fullscreen'><img src={FullscreenCloseImg} alt='' /></button>
+  //     )
+  //   }
+  // }
 
-  resetCommitList (value) {
-    this.config.display.sidebarCommitLimit = parseInt(value, 10)
-    this.populateSideBar(this.state.sidebarCurrentCommitIndex)
-  }
+  // resetCommitList (value) {
+  //   this.config.display.sidebarCommitLimit = parseInt(value, 10)
+  //   this.populateSideBar(this.state.sidebarCurrentCommitIndex)
+  // }
 
-  mobileTabView (param, e) {
-    this.setState({
-      mobileTabSelect: param
-    })
-  }
+  // mobileTabView (param, e) {
+  //   this.setState({
+  //     mobileTabSelect: param
+  //   })
+  // }
 
-  mobileTabSelectActive (value) {
-    return (this.state.mobileTabSelect === value) ? 'active' : ''
-  }
+  // mobileTabSelectActive (value) {
+  //   return (this.state.mobileTabSelect === value) ? 'active' : ''
+  // }
 
-  UI () {
-    const medusaUI = (this.config.scene.fullScreen) ? 'medusa-UI fullscreen' : 'medusa-UI'
+  // UI () {
+  //   const medusaUI = (this.config.scene.fullScreen) ? 'medusa-UI fullscreen' : 'medusa-UI'
 
-    const mobileTabSelectActive = (value) => {
-      return (this.state.mobileTabSelect === value) ? 'active' : ''
-    }
+  //   const mobileTabSelectActive = (value) => {
+  //     return (this.state.mobileTabSelect === value) ? 'active' : ''
+  //   }
 
-    if (this.state.showUI) {
-      return (
-        <div className={`${medusaUI} ${this.state.mobileTabSelect}`}>
+  //   if (this.state.showUI) {
+  //     return (
+  //       <div className={`${medusaUI} ${this.state.mobileTabSelect}`}>
 
-          <Media query='(max-width: 767px)'>
-            <div className='mobile-controls text-center'>
-              <span className='text-body text-center d-block'>{this.state.currentDate}</span>
-              <button onClick={this.state.goToPrev} className='prev border-0 bg-transparent text-body m-4 mt-2'><SVG src={IconPrev} /></button>
-              {this.playPauseButton()}
-              <button onClick={this.state.goToNext} className='next border-0 bg-transparent text-body m-4 mt-2'><SVG src={IconNext} /></button>
-            </div>
-          </Media>
+  //         <Media query='(max-width: 767px)'>
+  //           <div className='mobile-controls text-center'>
+  //             <span className='text-body text-center d-block'>{this.state.currentDate}</span>
+  //             <button onClick={this.state.goToPrev} className='prev border-0 bg-transparent text-body m-4 mt-2'><SVG src={IconPrev} /></button>
+  //             {this.playPauseButton()}
+  //             <button onClick={this.state.goToNext} className='next border-0 bg-transparent text-body m-4 mt-2'><SVG src={IconNext} /></button>
+  //           </div>
+  //         </Media>
 
-          <Sidebar
-            config={this.config}
-            currentDate={this.state.currentDate}
-            selected={this.state.currentDateObject}
-            onSelect={this.setDate.bind(this)}
-            minDate={moment(this.minDate)}
-            maxDate={moment(this.maxDate)}
-          >
+  //         <Sidebar
+  //           config={this.config}
+  //           currentDate={this.state.currentDate}
+  //           selected={this.state.currentDateObject}
+  //           onSelect={this.setDate.bind(this)}
+  //           minDate={moment(this.minDate)}
+  //           maxDate={moment(this.maxDate)}
+  //         >
 
-            <Head
-              config={this.config}
-              icon={<button className='bg-transparent border-0 text-primary pt-2 pb-1'><img src={Smallogo} alt='' /></button>}
-            />
+  //           <Head
+  //             config={this.config}
+  //             icon={<button className='bg-transparent border-0 text-primary pt-2 pb-1'><img src={Smallogo} alt='' /></button>}
+  //           />
 
-            <About
-              config={this.config}
-              icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconInfo} /></button>}
-            />
+  //           <About
+  //             config={this.config}
+  //             icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconInfo} /></button>}
+  //           />
 
-            <CommitList
-              icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconClock} /></button>}
-              title={this.config.widget.commitList.title}
-              slug={this.config.widget.commitList.slug}
-              config={this.config}
-              showing={this.config.widget.commitList.showing}
-              onChange={this.resetCommitList.bind(this)}
-              value={this.state.value}
-              sideBarCommits={this.state.sideBarCommits}
-              sidebarCurrentCommitIndex={this.state.sidebarCurrentCommitIndex}
-              loadCommit={this.loadCommit.bind(this)}
-              goToPrev={this.goToPrev.bind(this)}
-              goToNext={this.goToNext.bind(this)}
-              currentAdded={this.state.currentAdded}
-              currentChanged={this.state.currentChanged}
-              currentRemoved={this.state.currentRemoved}
-              currentAuthor={this.state.currentAuthor}
-              currentMsg={this.state.currentMsg}
-              currentDate={this.state.currentDate}
-              currentCommitHash={this.state.currentCommitHash}
-            />
+  //           <CommitList
+  //             icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconClock} /></button>}
+  //             title={this.config.widget.commitList.title}
+  //             slug={this.config.widget.commitList.slug}
+  //             config={this.config}
+  //             showing={this.config.widget.commitList.showing}
+  //             onChange={this.resetCommitList.bind(this)}
+  //             value={this.state.value}
+  //             sideBarCommits={this.state.sideBarCommits}
+  //             sidebarCurrentCommitIndex={this.state.sidebarCurrentCommitIndex}
+  //             loadCommit={this.loadCommit.bind(this)}
+  //             goToPrev={this.goToPrev.bind(this)}
+  //             goToNext={this.goToNext.bind(this)}
+  //             currentAdded={this.state.currentAdded}
+  //             currentChanged={this.state.currentChanged}
+  //             currentRemoved={this.state.currentRemoved}
+  //             currentAuthor={this.state.currentAuthor}
+  //             currentMsg={this.state.currentMsg}
+  //             currentDate={this.state.currentDate}
+  //             currentCommitHash={this.state.currentCommitHash}
+  //           />
 
-            <Widget
-              icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconCalendar} /></button>}
-              title={this.config.widget.calendar.title}
-              slug={this.config.widget.calendar.slug}
-            >
-              <DatePicker
-                inline
-                locale={this.config.lang}
-                selected={this.state.currentDateObject}
-                onSelect={this.setDate.bind(this)}
-                minDate={moment(this.minDate)}
-                maxDate={moment(this.maxDate)}
-              />
-            </Widget>
+  //           <Widget
+  //             icon={<button className='bg-transparent border-0 text-primary pt-1 pb-1'><SVG src={IconCalendar} /></button>}
+  //             title={this.config.widget.calendar.title}
+  //             slug={this.config.widget.calendar.slug}
+  //           >
+  //             <DatePicker
+  //               inline
+  //               locale={this.config.lang}
+  //               selected={this.state.currentDateObject}
+  //               onSelect={this.setDate.bind(this)}
+  //               minDate={moment(this.minDate)}
+  //               maxDate={moment(this.maxDate)}
+  //             />
+  //           </Widget>
 
-            <Media query='(max-width: 767px)'>
-              <div className='mobile-tabs'>
-                <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-about')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-about')}`}>About</button>
-                <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-commits')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-commits')}`}>Commits</button>
-                <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-calendar')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-calendar')}`}>Calendar</button>
-              </div>
-            </Media>
+  //           <Media query='(max-width: 767px)'>
+  //             <div className='mobile-tabs'>
+  //               <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-about')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-about')}`}>About</button>
+  //               <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-commits')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-commits')}`}>Commits</button>
+  //               <button ref='btn' onClick={this.mobileTabView.bind(this, 'viewing-calendar')} className={`${`close-info border-0 text-primary p-3 text-uppercase`} ${mobileTabSelectActive('viewing-calendar')}`}>Calendar</button>
+  //             </div>
+  //           </Media>
 
-          </Sidebar>
-          <Content>
-            <div className='controls top'>
+  //         </Sidebar>
+  //         <Content>
+  //           <div className='controls top'>
 
-              <BrowserRouter>
-                {this.closeFullscreenButton()}
-              </BrowserRouter>
+  //             <BrowserRouter>
+  //               {this.closeFullscreenButton()}
+  //             </BrowserRouter>
 
-              <Controls state={this.state} setPlay={this.setPlay.bind(this)} goToPrev={this.goToPrev.bind(this)} >
-                {this.slider()}
+  //             <Controls state={this.state} setPlay={this.setPlay.bind(this)} goToPrev={this.goToPrev.bind(this)} >
+  //               {this.slider()}
 
-                <button onClick={this.state.goToNext} className='next border-0 bg-transparent'><SVG src={IconNext} /></button>
+  //               <button onClick={this.state.goToNext} className='next border-0 bg-transparent'><SVG src={IconNext} /></button>
 
-                <DatePicker
-                  customInput={<Calendar />}
-                  locale={this.config.lang}
-                  popperPlacement='bottom-end'
-                  selected={this.state.currentDateObject}
-                  onSelect={this.setDate.bind(this)}
-                  minDate={moment(this.minDate)}
-                  maxDate={moment(this.maxDate)}
-                />
-              </Controls>
+  //               <DatePicker
+  //                 customInput={<Calendar />}
+  //                 locale={this.config.lang}
+  //                 popperPlacement='bottom-end'
+  //                 selected={this.state.currentDateObject}
+  //                 onSelect={this.setDate.bind(this)}
+  //                 minDate={moment(this.minDate)}
+  //                 maxDate={moment(this.maxDate)}
+  //               />
+  //             </Controls>
 
-            </div>
+  //           </div>
 
-            <Legend config={this.config} />
+  //           <Legend config={this.config} />
 
-          </Content>
-        </div>
-      )
-    }
-  }
+  //         </Content>
+  //       </div>
+  //     )
+  //   }
+  // }
 
-  slider () {
-    if (this.state.dateRangeLoaded) {
-      return (
-        <SliderWithTooltip
-          tipFormatter={dateSliderTooltipFormatter}
-          min={moment(this.minDate).valueOf()}
-          max={moment(this.maxDate).valueOf()}
-          onAfterChange={this.setTimestamp.bind(this)}
-          onChange={this.onDateSliderChange.bind(this)}
-          value={this.state.currentDateObject.valueOf()}
-        />
-      )
-    }
-  }
+  // slider () {
+  //   if (this.state.dateRangeLoaded) {
+  //     return (
+  //       <SliderWithTooltip
+  //         tipFormatter={dateSliderTooltipFormatter}
+  //         min={moment(this.minDate).valueOf()}
+  //         max={moment(this.maxDate).valueOf()}
+  //         onAfterChange={this.setTimestamp.bind(this)}
+  //         onChange={this.onDateSliderChange.bind(this)}
+  //         value={this.state.currentDateObject.valueOf()}
+  //       />
+  //     )
+  //   }
+  // }
 
   render () {
     const cls = (this.config.display.showUI) ? 'showing-UI App' : 'App'
 
     return (
       <div className={`${cls} ${`bsnoclash`}`}>
-        <FileInfo
+        {/* <FileInfo
           fileInfoLocation={this.state.fileInfoLocation}
           showFileInfo={this.state.showFileInfo}
           loadingFileInfo={this.state.loadingFileInfo}
@@ -1796,8 +1796,8 @@ class Medusa extends mixin(EventEmitter, Component) {
           selectedFileCommitID={this.state.selectedFileCommitID}
           selectedFileCommitURL={this.state.selectedFileCommitURL}
           config={this.config}
-        />
-        {this.UI()}
+        /> */}
+        {/* {this.UI()} */}
         <canvas width={this.config.scene.width} height={this.config.scene.height} id={this.config.scene.canvasID} />
       </div>
     )

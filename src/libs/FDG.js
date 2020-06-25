@@ -26,7 +26,7 @@ import TextureHelper from './TextureHelper'
 // Geometry
 import NodeGeometry from './geometry/node/NodeGeometry'
 import EdgeGeometry from './geometry/edge/EdgeGeometry'
-import TextGeometry from './geometry/text/TextGeometry'
+// import TextGeometry from './geometry/text/TextGeometry'
 
 // Shaders
 import PullVert from '../shaders/pull.vert'
@@ -63,7 +63,7 @@ export default class FDG {
     this.textureHelper = new TextureHelper()
     this.nodeGeometry = new NodeGeometry(this.config)
     this.edgeGeometry = new EdgeGeometry(this.config)
-    this.textGeometry = new TextGeometry(this.config)
+    // this.textGeometry = new TextGeometry(this.config)
 
     this.firstRun = true // if this is the first time the class has been run
     this.textureWidth = 0
@@ -283,7 +283,7 @@ export default class FDG {
     this.initPositions()
     this.initEdges()
     this.initNodes()
-    this.initText()
+    // this.initText()
 
     this.animateSphere()
 
@@ -385,7 +385,7 @@ export default class FDG {
       // update nodes
       this.nodeGeometry.update(this.camera, this.frame, dt)
       this.edgeGeometry.update(this.camera, this.frame, dt)
-      this.textGeometry.update(this.camera, this.frame, dt)
+      // this.textGeometry.update(this.camera, this.frame, dt)
     }
   }
 
@@ -430,31 +430,31 @@ export default class FDG {
     }
   }
 
-  initText () {
-    if (!this.config.FDG.showFilePaths) {
-      if (this.text) {
-        this.scene.remove(this.text)
-      }
-      return
-    }
+  // initText () {
+  //   if (!this.config.FDG.showFilePaths) {
+  //     if (this.text) {
+  //       this.scene.remove(this.text)
+  //     }
+  //     return
+  //   }
 
-    if (!this.text) {
-      this.text = this.textGeometry.create(this.nodeData, this.nodeCount)
-      this.scene.add(this.text)
-    } else {
-      this.textGeometry.setAttributes(
-        this.nodeData,
-        this.text.geometry.attributes.labelPositions.array,
-        this.text.geometry.attributes.textCoord.array,
-        this.text.geometry.attributes.textureLocation.array,
-        this.text.geometry.attributes.scale.array
-      )
-      this.text.geometry.attributes.labelPositions.needsUpdate = true
-      this.text.geometry.attributes.textCoord.needsUpdate = true
-      this.text.geometry.attributes.textureLocation.needsUpdate = true
-      this.text.geometry.attributes.scale.needsUpdate = true
-    }
-  }
+  //   if (!this.text) {
+  //     this.text = this.textGeometry.create(this.nodeData, this.nodeCount)
+  //     this.scene.add(this.text)
+  //   } else {
+  //     this.textGeometry.setAttributes(
+  //       this.nodeData,
+  //       this.text.geometry.attributes.labelPositions.array,
+  //       this.text.geometry.attributes.textCoord.array,
+  //       this.text.geometry.attributes.textureLocation.array,
+  //       this.text.geometry.attributes.scale.array
+  //     )
+  //     this.text.geometry.attributes.labelPositions.needsUpdate = true
+  //     this.text.geometry.attributes.textCoord.needsUpdate = true
+  //     this.text.geometry.attributes.textureLocation.needsUpdate = true
+  //     this.text.geometry.attributes.scale.needsUpdate = true
+  //   }
+  // }
 
   passThroughTexture (input, output) {
     this.passThroughMaterial.uniforms.texture.value = input
