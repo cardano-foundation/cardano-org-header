@@ -1,10 +1,7 @@
-import {
-  WebGLRenderTarget,
-  UniformsUtils,
-  ShaderMaterial,
-  LinearFilter,
-  RGBFormat
-} from 'three'
+import { WebGLRenderTarget } from 'three/src/renderers/WebGLRenderTarget'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { LinearFilter, RGBFormat } from 'three/src/constants'
 
 import Pass from './Pass'
 import CopyShader from './CopyShader'

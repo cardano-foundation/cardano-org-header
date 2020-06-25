@@ -1,8 +1,6 @@
-import {
-  OrthographicCamera,
-  PlaneBufferGeometry,
-  Mesh
-} from 'three'
+import { OrthographicCamera } from 'three/src/cameras/OrthographicCamera'
+import { PlaneBufferGeometry } from 'three/src/geometries/PlaneGeometry'
+import { Mesh } from 'three/src/objects/Mesh'
 
 const Pass = function () {
   // if set to true, the pass is processed by the composer

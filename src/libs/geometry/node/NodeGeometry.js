@@ -1,14 +1,12 @@
-import {
-  Vector3,
-  ShaderMaterial,
-  BufferAttribute,
-  TextureLoader,
-  BufferGeometry,
-  Color,
-  Points,
-  ShaderLib,
-  UniformsUtils
-} from 'three'
+import { Vector3 } from 'three/src/math/Vector3'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { BufferAttribute } from 'three/src/core/BufferAttribute'
+import { BufferGeometry } from 'three/src/core/BufferGeometry'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { Color } from 'three/src/math/Color'
+import { Points } from 'three/src/objects/Points'
+import { ShaderLib } from 'three/src/renderers/shaders/ShaderLib'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
 
 import TextureHelper from '../../TextureHelper'
 

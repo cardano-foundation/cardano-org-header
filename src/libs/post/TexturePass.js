@@ -1,11 +1,5 @@
-import {
-  ShaderMaterial,
-  UniformsUtils,
-  CustomBlending,
-  AddEquation,
-  OneFactor,
-  OneMinusSrcAlphaFactor
-} from 'three'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
 
 import Pass from './Pass'
 import CopyShader from './CopyShader'

@@ -1,13 +1,9 @@
-import {
-  WebGLRenderTarget,
-  ShaderMaterial,
-  UniformsUtils,
-  NearestFilter,
-  MeshDepthMaterial,
-  RGBADepthPacking,
-  NoBlending,
-  Color
-} from 'three'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
+import { WebGLRenderTarget } from 'three/src/renderers/WebGLRenderTarget'
+import { NoBlending, NearestFilter, RGBADepthPacking } from 'three/src/constants'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { MeshDepthMaterial } from 'three/src/materials/MeshDepthMaterial'
+import { Color } from 'three/src/math/Color'
 
 import BokehShader from './BokehShader'
 import Pass from './Pass'

@@ -2,7 +2,7 @@
 
 import {
   TextureLoader
-} from 'three'
+} from 'three/src/loaders/TextureLoader'
 
 const UbuntuMono = function (path) {
   let texture = new TextureLoader().load(path)

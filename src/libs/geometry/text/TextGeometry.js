@@ -1,11 +1,10 @@
-import {
-  PlaneBufferGeometry,
-  InstancedBufferGeometry,
-  InstancedBufferAttribute,
-  ShaderMaterial,
-  Mesh,
-  AdditiveBlending
-} from 'three'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { PlaneBufferGeometry } from 'three/src/geometries/PlaneGeometry'
+import { InstancedBufferGeometry } from 'three/src/core/InstancedBufferGeometry'
+import { InstancedBufferAttribute } from 'three/src/core/InstancedBufferAttribute'
+
+import { Mesh } from 'three/src/objects/Mesh'
+import { AdditiveBlending } from 'three/src/constants'
 
 import TextureHelper from '../../TextureHelper'
 

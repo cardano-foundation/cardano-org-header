@@ -1,12 +1,8 @@
-import {
-  UniformsUtils,
-  WebGLRenderTarget,
-  LinearFilter,
-  NearestFilter,
-  RGBAFormat,
-  ShaderMaterial,
-  MeshBasicMaterial
-} from 'three'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
+import { WebGLRenderTarget } from 'three/src/renderers/WebGLRenderTarget'
+import { LinearFilter, NearestFilter, RGBAFormat } from 'three/src/constants'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { MeshBasicMaterial } from 'three/src/materials/MeshBasicMaterial'
 
 import Pass from './Pass'
 import AfterimageShader from './AfterimageShader'

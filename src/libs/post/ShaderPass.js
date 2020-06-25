@@ -1,7 +1,5 @@
-import {
-  ShaderMaterial,
-  UniformsUtils
-} from 'three'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
 
 import Pass from './Pass'
 

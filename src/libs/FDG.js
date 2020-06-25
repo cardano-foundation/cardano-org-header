@@ -1,24 +1,16 @@
-// 3rd Party
-import {
-  Vector2,
-  Scene,
-  OrthographicCamera,
-  WebGLRenderTarget,
-  LinearFilter,
-  ClampToEdgeWrapping,
-  NearestFilter,
-  RGBAFormat,
-  DataTexture,
-  LuminanceAlphaFormat,
-  FloatType,
-  ShaderMaterial,
-  PlaneBufferGeometry,
-  Mesh,
-  BufferGeometry,
-  BufferAttribute,
-  AdditiveBlending,
-  Points
-} from 'three'
+
+import { Vector2 } from 'three/src/math/Vector2'
+import { Scene } from 'three/src/scenes/Scene'
+import { OrthographicCamera } from 'three/src/cameras/OrthographicCamera'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { Mesh } from 'three/src/objects/Mesh'
+import { WebGLRenderTarget } from 'three/src/renderers/WebGLRenderTarget'
+import { LinearFilter, ClampToEdgeWrapping, NearestFilter, RGBAFormat, LuminanceAlphaFormat, FloatType, AdditiveBlending } from 'three/src/constants'
+import { DataTexture } from 'three/src/textures/DataTexture'
+import { PlaneBufferGeometry } from 'three/src/geometries/PlaneGeometry'
+import { BufferAttribute } from 'three/src/core/BufferAttribute'
+import { BufferGeometry } from 'three/src/core/BufferGeometry'
+import { Points } from 'three/src/objects/Points'
 
 // Helpers
 import TextureHelper from './TextureHelper'

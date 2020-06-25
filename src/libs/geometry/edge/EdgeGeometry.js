@@ -1,10 +1,8 @@
-import {
-  Vector3,
-  ShaderMaterial,
-  BufferAttribute,
-  LineSegments,
-  BufferGeometry
-} from 'three'
+import { Vector3 } from 'three/src/math/Vector3'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { BufferAttribute } from 'three/src/core/BufferAttribute'
+import { BufferGeometry } from 'three/src/core/BufferGeometry'
+import { LineSegments } from 'three/src/objects/LineSegments'
 
 // shaders
 import FragmentShader from './shaders/edge.frag'

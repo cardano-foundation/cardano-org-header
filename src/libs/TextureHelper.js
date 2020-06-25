@@ -1,9 +1,5 @@
-import {
-  DataTexture,
-  NearestFilter,
-  RGBAFormat,
-  FloatType
-} from 'three'
+import { DataTexture } from 'three/src/textures/DataTexture'
+import { NearestFilter, RGBAFormat, FloatType } from 'three/src/constants'
 
 export default class TextureHelper {
   constructor () {

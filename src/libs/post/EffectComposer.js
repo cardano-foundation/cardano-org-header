@@ -1,10 +1,7 @@
-import {
-  Vector2,
-  LinearFilter,
-  RGBAFormat,
-  WebGLRenderTarget,
-  Clock
-} from 'three'
+import { Vector2 } from 'three/src/math/Vector2'
+import { WebGLRenderTarget } from 'three/src/renderers/WebGLRenderTarget'
+import { LinearFilter, RGBAFormat } from 'three/src/constants'
+import { Clock } from 'three/src/core/Clock'
 
 import ShaderPass from './ShaderPass'
 import { MaskPass, ClearMaskPass } from './MaskPass'

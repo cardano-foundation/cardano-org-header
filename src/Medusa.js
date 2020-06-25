@@ -1,27 +1,24 @@
 // 3rd Party
 import React, { Component } from 'react'
 
-import {
-  Vector2,
-  Vector3,
-  Scene,
-  PerspectiveCamera,
-  WebGLRenderer,
-  Clock,
-  UniformsUtils,
-  ShaderLib,
-  ShaderMaterial,
-  MeshDepthMaterial,
-  SphereBufferGeometry,
-  Mesh,
-  BackSide,
-  BoxBufferGeometry,
-  CustomBlending
-} from 'three'
+import { Vector2 } from 'three/src/math/Vector2'
+import { Vector3 } from 'three/src/math/Vector3'
+import { Scene } from 'three/src/scenes/Scene'
+import { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera'
+import { WebGLRenderer } from 'three/src/renderers/WebGLRenderer'
+import { Clock } from 'three/src/core/Clock'
+import { UniformsUtils } from 'three/src/renderers/shaders/UniformsUtils'
+import { ShaderLib } from 'three/src/renderers/shaders/ShaderLib'
+import { ShaderMaterial } from 'three/src/materials/ShaderMaterial'
+import { MeshDepthMaterial } from 'three/src/materials/MeshDepthMaterial'
+import { SphereBufferGeometry } from 'three/src/geometries/SphereGeometry'
+import { BoxBufferGeometry } from 'three/src/geometries/BoxGeometry'
+import { Mesh } from 'three/src/objects/Mesh'
+import { BackSide, CustomBlending } from 'three/src/constants'
 
 // import * as dat from 'dat.gui'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from './libs/vendor/OrbitControls'
 import deepAssign from 'deep-assign'
 import EventEmitter from 'eventemitter3'
 import mixin from 'mixin'

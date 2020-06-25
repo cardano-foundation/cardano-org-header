@@ -1,7 +1,7 @@
 import {
   HalfFloatType,
   FloatType
-} from 'three'
+} from 'three/src/constants'
 
 import Detector from './libs/Detector'
 
