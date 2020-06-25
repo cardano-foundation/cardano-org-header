@@ -24,11 +24,11 @@ import { OrbitControls } from './libs/vendor/OrbitControls'
 import deepAssign from 'deep-assign'
 import EventEmitter from 'eventemitter3'
 import mixin from 'mixin'
-import moment from 'moment'
-import 'moment/locale/ja'
-import 'moment/locale/zh-cn'
-import 'moment/locale/ko'
-import 'moment/locale/en-gb'
+// import moment from 'moment'
+// import 'moment/locale/ja'
+// import 'moment/locale/zh-cn'
+// import 'moment/locale/ko'
+// import 'moment/locale/en-gb'
 
 // import firebase from 'firebase/app'
 // import 'firebase/firestore'
@@ -91,206 +91,206 @@ import { edges } from './data/edges'
 
 // const SliderWithTooltip = createSliderWithTooltip(Slider)
 
-const UIlabels = {
-  en: {
-    widget: {
-      head: {
-        title: 'MEDUSA',
-        subtitle: 'Github project activity',
-        content: 'Introduction'
-      },
-      about: {
-        title: 'About'
-      },
-      commitList: {
-        title: 'Commit List',
-        showing: 'Showing',
-        addition: 'Addition',
-        removal: 'Removal',
-        change: 'Change',
-        additions: 'Additions',
-        removals: 'Removals',
-        changes: 'Changes',
-        viewfile: 'View file',
-        viewcommit: 'View commit'
-      },
-      calendar: {
-        title: 'Calendar'
-      }
-    },
-    legend: {
-      committed: {
-        title: 'Committed file'
-      },
-      updated: {
-        title: 'Updated file'
-      },
-      cold: {
-        title: 'Cold file'
-      }
-    }
-  },
-  ja: {
-    widget: {
-      head: {
-        title: 'MEDUSA',
-        subtitle: 'Github プロジェクトアクティビティ ライブ',
-        content: ''
-      },
-      about: {
-        title: '内容'
-      },
-      commitList: {
-        title: 'コミットリスト',
-        showing: '表示中',
-        addition: '添加',
-        removal: '除去',
-        change: '変化する',
-        additions: '追加',
-        removals: '削除',
-        changes: '変更点',
-        viewfile: 'ファイルを閲覧する',
-        viewcommit: 'コミットを見る'
-      },
-      calendar: {
-        title: 'カレンダー'
-      }
-    },
-    legend: {
-      committed: {
-        title: 'コミットされたファイル'
-      },
-      updated: {
-        title: '更新ファイル'
-      },
-      cold: {
-        title: 'コールドファイル'
-      }
-    }
-  },
-  cn: {
-    widget: {
-      head: {
-        title: 'Medusa 项目浏览器',
-        subtitle: 'Github 项目活动状态',
-        content: ''
-      },
-      about: {
-        title: '关于'
-      },
-      commitList: {
-        title: '提交清单',
-        showing: '显示',
-        addition: '加成',
-        removal: '切除',
-        change: '更改',
-        additions: '附加',
-        removals: '清除',
-        changes: '变化',
-        viewfile: '查看文件',
-        viewcommit: '查看提交'
-      },
-      calendar: {
-        title: '日历'
-      }
-    },
-    legend: {
-      committed: {
-        title: '提交文件'
-      },
-      updated: {
-        title: '更新的文件'
-      },
-      cold: {
-        title: '冷文件'
-      }
-    }
-  },
-  kr: {
-    widget: {
-      head: {
-        title: 'Medusa 프로젝트 탐색기',
-        subtitle: 'Github 프로젝트 활동 라이브',
-        content: ''
-      },
-      about: {
-        title: '개요'
-      },
-      commitList: {
-        title: '커밋 목록',
-        showing: '표시',
-        addition: '부가',
-        removal: '제거',
-        change: '변화',
-        additions: '추가',
-        removals: '삭제',
-        changes: '변경 사항',
-        viewfile: '파일보기',
-        viewcommit: '커밋보기'
-      },
-      calendar: {
-        title: '달력'
-      }
-    },
-    legend: {
-      committed: {
-        title: '커밋된 파일'
-      },
-      updated: {
-        title: '업데이트된 파일'
-      },
-      cold: {
-        title: '콜드 파일'
-      }
-    }
-  },
-  ko: {
-    widget: {
-      head: {
-        title: 'Medusa 프로젝트 탐색기',
-        subtitle: 'Github 프로젝트 활동 라이브',
-        content: ''
-      },
-      about: {
-        title: '개요'
-      },
-      commitList: {
-        title: '커밋 목록',
-        showing: '표시',
-        addition: '부가',
-        removal: '제거',
-        change: '변화',
-        additions: '추가',
-        removals: '삭제',
-        changes: '변경 사항',
-        viewfile: '파일보기',
-        viewcommit: '커밋보기'
-      },
-      calendar: {
-        title: '달력'
-      }
-    },
-    legend: {
-      committed: {
-        title: '커밋된 파일'
-      },
-      updated: {
-        title: '업데이트된 파일'
-      },
-      cold: {
-        title: '콜드 파일'
-      }
-    }
-  }
-}
+// const UIlabels = {
+//   en: {
+//     widget: {
+//       head: {
+//         title: 'MEDUSA',
+//         subtitle: 'Github project activity',
+//         content: 'Introduction'
+//       },
+//       about: {
+//         title: 'About'
+//       },
+//       commitList: {
+//         title: 'Commit List',
+//         showing: 'Showing',
+//         addition: 'Addition',
+//         removal: 'Removal',
+//         change: 'Change',
+//         additions: 'Additions',
+//         removals: 'Removals',
+//         changes: 'Changes',
+//         viewfile: 'View file',
+//         viewcommit: 'View commit'
+//       },
+//       calendar: {
+//         title: 'Calendar'
+//       }
+//     },
+//     legend: {
+//       committed: {
+//         title: 'Committed file'
+//       },
+//       updated: {
+//         title: 'Updated file'
+//       },
+//       cold: {
+//         title: 'Cold file'
+//       }
+//     }
+//   },
+//   ja: {
+//     widget: {
+//       head: {
+//         title: 'MEDUSA',
+//         subtitle: 'Github プロジェクトアクティビティ ライブ',
+//         content: ''
+//       },
+//       about: {
+//         title: '内容'
+//       },
+//       commitList: {
+//         title: 'コミットリスト',
+//         showing: '表示中',
+//         addition: '添加',
+//         removal: '除去',
+//         change: '変化する',
+//         additions: '追加',
+//         removals: '削除',
+//         changes: '変更点',
+//         viewfile: 'ファイルを閲覧する',
+//         viewcommit: 'コミットを見る'
+//       },
+//       calendar: {
+//         title: 'カレンダー'
+//       }
+//     },
+//     legend: {
+//       committed: {
+//         title: 'コミットされたファイル'
+//       },
+//       updated: {
+//         title: '更新ファイル'
+//       },
+//       cold: {
+//         title: 'コールドファイル'
+//       }
+//     }
+//   },
+//   cn: {
+//     widget: {
+//       head: {
+//         title: 'Medusa 项目浏览器',
+//         subtitle: 'Github 项目活动状态',
+//         content: ''
+//       },
+//       about: {
+//         title: '关于'
+//       },
+//       commitList: {
+//         title: '提交清单',
+//         showing: '显示',
+//         addition: '加成',
+//         removal: '切除',
+//         change: '更改',
+//         additions: '附加',
+//         removals: '清除',
+//         changes: '变化',
+//         viewfile: '查看文件',
+//         viewcommit: '查看提交'
+//       },
+//       calendar: {
+//         title: '日历'
+//       }
+//     },
+//     legend: {
+//       committed: {
+//         title: '提交文件'
+//       },
+//       updated: {
+//         title: '更新的文件'
+//       },
+//       cold: {
+//         title: '冷文件'
+//       }
+//     }
+//   },
+//   kr: {
+//     widget: {
+//       head: {
+//         title: 'Medusa 프로젝트 탐색기',
+//         subtitle: 'Github 프로젝트 활동 라이브',
+//         content: ''
+//       },
+//       about: {
+//         title: '개요'
+//       },
+//       commitList: {
+//         title: '커밋 목록',
+//         showing: '표시',
+//         addition: '부가',
+//         removal: '제거',
+//         change: '변화',
+//         additions: '추가',
+//         removals: '삭제',
+//         changes: '변경 사항',
+//         viewfile: '파일보기',
+//         viewcommit: '커밋보기'
+//       },
+//       calendar: {
+//         title: '달력'
+//       }
+//     },
+//     legend: {
+//       committed: {
+//         title: '커밋된 파일'
+//       },
+//       updated: {
+//         title: '업데이트된 파일'
+//       },
+//       cold: {
+//         title: '콜드 파일'
+//       }
+//     }
+//   },
+//   ko: {
+//     widget: {
+//       head: {
+//         title: 'Medusa 프로젝트 탐색기',
+//         subtitle: 'Github 프로젝트 활동 라이브',
+//         content: ''
+//       },
+//       about: {
+//         title: '개요'
+//       },
+//       commitList: {
+//         title: '커밋 목록',
+//         showing: '표시',
+//         addition: '부가',
+//         removal: '제거',
+//         change: '변화',
+//         additions: '추가',
+//         removals: '삭제',
+//         changes: '변경 사항',
+//         viewfile: '파일보기',
+//         viewcommit: '커밋보기'
+//       },
+//       calendar: {
+//         title: '달력'
+//       }
+//     },
+//     legend: {
+//       committed: {
+//         title: '커밋된 파일'
+//       },
+//       updated: {
+//         title: '업데이트된 파일'
+//       },
+//       cold: {
+//         title: '콜드 파일'
+//       }
+//     }
+//   }
+// }
 
-const langLocales = {
-  ja: 'ja',
-  cn: 'zh-cn',
-  kr: 'ko',
-  ko: 'ko',
-  en: 'en-gb'
-}
+// const langLocales = {
+//   ja: 'ja',
+//   cn: 'zh-cn',
+//   kr: 'ko',
+//   ko: 'ko',
+//   en: 'en-gb'
+// }
 
 // function dateSliderTooltipFormatter (v) {
 //   return `${moment(v).format('DD.MM.YYYY')}`
@@ -331,25 +331,25 @@ class Medusa extends mixin(EventEmitter, Component) {
         this.config.lang = urlParams.get('lang')
       }
 
-      this.config.widget.head.title = UIlabels[this.config.lang].widget.head.title
-      this.config.widget.head.subtitle = UIlabels[this.config.lang].widget.head.subtitle
-      this.config.widget.head.content = UIlabels[this.config.lang].widget.head.content
+      // this.config.widget.head.title = UIlabels[this.config.lang].widget.head.title
+      // this.config.widget.head.subtitle = UIlabels[this.config.lang].widget.head.subtitle
+      // this.config.widget.head.content = UIlabels[this.config.lang].widget.head.content
 
-      this.config.widget.about.title = UIlabels[this.config.lang].widget.about.title
-      this.config.widget.commitList.title = UIlabels[this.config.lang].widget.commitList.title
-      this.config.widget.commitList.showing = UIlabels[this.config.lang].widget.commitList.showing
-      this.config.widget.commitList.addition = UIlabels[this.config.lang].widget.commitList.addition
-      this.config.widget.commitList.change = UIlabels[this.config.lang].widget.commitList.change
-      this.config.widget.commitList.removal = UIlabels[this.config.lang].widget.commitList.removal
-      this.config.widget.commitList.additions = UIlabels[this.config.lang].widget.commitList.additions
-      this.config.widget.commitList.changes = UIlabels[this.config.lang].widget.commitList.changes
-      this.config.widget.commitList.removals = UIlabels[this.config.lang].widget.commitList.removals
-      this.config.widget.commitList.viewfile = UIlabels[this.config.lang].widget.commitList.viewfile
-      this.config.widget.commitList.viewcommit = UIlabels[this.config.lang].widget.commitList.viewcommit
-      this.config.widget.calendar.title = UIlabels[this.config.lang].widget.calendar.title
-      this.config.legend.committed.title = UIlabels[this.config.lang].legend.committed.title
-      this.config.legend.updated.title = UIlabels[this.config.lang].legend.updated.title
-      this.config.legend.cold.title = UIlabels[this.config.lang].legend.cold.title
+      // this.config.widget.about.title = UIlabels[this.config.lang].widget.about.title
+      // this.config.widget.commitList.title = UIlabels[this.config.lang].widget.commitList.title
+      // this.config.widget.commitList.showing = UIlabels[this.config.lang].widget.commitList.showing
+      // this.config.widget.commitList.addition = UIlabels[this.config.lang].widget.commitList.addition
+      // this.config.widget.commitList.change = UIlabels[this.config.lang].widget.commitList.change
+      // this.config.widget.commitList.removal = UIlabels[this.config.lang].widget.commitList.removal
+      // this.config.widget.commitList.additions = UIlabels[this.config.lang].widget.commitList.additions
+      // this.config.widget.commitList.changes = UIlabels[this.config.lang].widget.commitList.changes
+      // this.config.widget.commitList.removals = UIlabels[this.config.lang].widget.commitList.removals
+      // this.config.widget.commitList.viewfile = UIlabels[this.config.lang].widget.commitList.viewfile
+      // this.config.widget.commitList.viewcommit = UIlabels[this.config.lang].widget.commitList.viewcommit
+      // this.config.widget.calendar.title = UIlabels[this.config.lang].widget.calendar.title
+      // this.config.legend.committed.title = UIlabels[this.config.lang].legend.committed.title
+      // this.config.legend.updated.title = UIlabels[this.config.lang].legend.updated.title
+      // this.config.legend.cold.title = UIlabels[this.config.lang].legend.cold.title
 
       if (urlParams.has('title')) {
         let value = urlParams.get('title')
@@ -417,7 +417,7 @@ class Medusa extends mixin(EventEmitter, Component) {
     this.mousePos = new Vector2() // keep track of mouse position
     this.mouseDelta = new Vector2() // keep track of mouse position
 
-    this.timestampToLoad = this.setTimestampToLoad() // should a specific timestamp be loaded
+    // this.timestampToLoad = this.setTimestampToLoad() // should a specific timestamp be loaded
 
     this.commitsToProcess = [] // list of commits to process
     this.nodes = {} // node data
@@ -468,7 +468,7 @@ class Medusa extends mixin(EventEmitter, Component) {
     this.state = {
       play: this.config.FDG.autoPlay,
       currentDate: null,
-      currentDateObject: moment(),
+      // currentDateObject: moment(),
       currentCommitHash: '',
       spherize: this.config.FDG.sphereProject,
       currentCommit: null,
@@ -510,21 +510,21 @@ class Medusa extends mixin(EventEmitter, Component) {
     })
   }
 
-  setTimestampToLoad () {
-    let timestampToLoad = 0
-    if (typeof URLSearchParams !== 'undefined') {
-      // get date from URL
-      let urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.has('date')) {
-        timestampToLoad = moment(urlParams.get('date')).valueOf()
-      } else {
-        if (this.config.git.commitDate) {
-          timestampToLoad = moment(this.config.git.commitDate).valueOf()
-        }
-      }
-    }
-    return timestampToLoad
-  }
+  // setTimestampToLoad () {
+  //   let timestampToLoad = 0
+  //   if (typeof URLSearchParams !== 'undefined') {
+  //     // get date from URL
+  //     let urlParams = new URLSearchParams(window.location.search)
+  //     if (urlParams.has('date')) {
+  //       timestampToLoad = moment(urlParams.get('date')).valueOf()
+  //     } else {
+  //       if (this.config.git.commitDate) {
+  //         timestampToLoad = moment(this.config.git.commitDate).valueOf()
+  //       }
+  //     }
+  //   }
+  //   return timestampToLoad
+  // }
 
   /**
    * Slow down a potential DDOS attack by requiring the user to be signed in anonymously
@@ -549,35 +549,35 @@ class Medusa extends mixin(EventEmitter, Component) {
    *
    * @param {moment} dateObject
    */
-  async setDate (dateObject) {
-    this.timestampToLoad = dateObject.valueOf()
+  // async setDate (dateObject) {
+  //   this.timestampToLoad = dateObject.valueOf()
 
-    this.setState({
-      currentDateObject: dateObject
-    })
+  //   this.setState({
+  //     currentDateObject: dateObject
+  //   })
 
-    if (this.state.play) {
-      this.setPlay(false)
-    }
-    this.callAPI()
-  }
+  //   if (this.state.play) {
+  //     this.setPlay(false)
+  //   }
+  //   this.callAPI()
+  // }
 
   /**
    * Set timestamp to load commits from
    *
    * @param {string} timestamp
    */
-  async setTimestamp (timestamp) {
-    this.timestampToLoad = timestamp
+  // async setTimestamp (timestamp) {
+  //   this.timestampToLoad = timestamp
 
-    this.setState({
-      currentDateObject: moment(timestamp)
-    })
-    if (this.state.play) {
-      this.setPlay(false)
-    }
-    this.callAPI()
-  }
+  //   this.setState({
+  //     currentDateObject: moment(timestamp)
+  //   })
+  //   if (this.state.play) {
+  //     this.setPlay(false)
+  //   }
+  //   this.callAPI()
+  // }
 
   /**
    * Toggle sphere projection mode
@@ -900,97 +900,97 @@ class Medusa extends mixin(EventEmitter, Component) {
 
     // this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false)
 
-    this.on('ready', () => {
-      // this.setDateRange()
-    })
+    // this.on('ready', () => {
+    // this.setDateRange()
+    // })
 
-    this.on('nodeDeselect', function (data) {
-      this.controls.enabled = true
-      this.controls.enableDamping = true
-      this.setState({
-        showFileInfo: false
-      })
-    })
+    // this.on('nodeDeselect', function (data) {
+    //   this.controls.enabled = true
+    //   this.controls.enableDamping = true
+    //   this.setState({
+    //     showFileInfo: false
+    //   })
+    // })
 
     // call github API when selecting node
-    this.on('nodeSelect', async function (data) {
-      if (!this.config.FDG.usePicker) {
-        return
-      }
+    // this.on('nodeSelect', async function (data) {
+    //   if (!this.config.FDG.usePicker) {
+    //     return
+    //   }
 
-      this.controls.enableDamping = false
-      this.controls.enabled = false
+    //   this.controls.enableDamping = false
+    //   this.controls.enabled = false
 
-      // check dist of popup from screen edge
-      let fileInfoLocation = data.mousePos.clone()
-      fileInfoLocation.x += window.scrollX
-      fileInfoLocation.y += window.scrollY
-      let distFromRightEdge = this.canvas.width - data.mousePos.x
-      if (distFromRightEdge < 400) {
-        fileInfoLocation.x -= 390
-      }
+    //   // check dist of popup from screen edge
+    //   let fileInfoLocation = data.mousePos.clone()
+    //   fileInfoLocation.x += window.scrollX
+    //   fileInfoLocation.y += window.scrollY
+    //   let distFromRightEdge = this.canvas.width - data.mousePos.x
+    //   if (distFromRightEdge < 400) {
+    //     fileInfoLocation.x -= 390
+    //   }
 
-      let distFromBottomEdge = this.canvas.height - data.mousePos.y
-      if (distFromBottomEdge < 100) {
-        fileInfoLocation.y -= 50
-      }
+    //   let distFromBottomEdge = this.canvas.height - data.mousePos.y
+    //   if (distFromBottomEdge < 100) {
+    //     fileInfoLocation.y -= 50
+    //   }
 
-      let distFromTopEdge = data.mousePos.y
-      if (distFromTopEdge < 50) {
-        fileInfoLocation.y += 50
-      }
+    //   let distFromTopEdge = data.mousePos.y
+    //   if (distFromTopEdge < 50) {
+    //     fileInfoLocation.y += 50
+    //   }
 
-      this.setState({
-        loadingFileInfo: true,
-        selectedFilePath: data.nodeData.p,
-        fileInfoLocation: fileInfoLocation,
-        showFileInfo: true
-      })
+    //   this.setState({
+    //     loadingFileInfo: true,
+    //     selectedFilePath: data.nodeData.p,
+    //     fileInfoLocation: fileInfoLocation,
+    //     showFileInfo: true
+    //   })
 
-      let commitDate = moment(this.state.currentCommit.committerDate).locale(langLocales[this.config.lang]).format()
+    //   let commitDate = moment(this.state.currentCommit.committerDate).locale(langLocales[this.config.lang]).format()
 
-      let uri = 'https://us-central1-webgl-gource-1da99.cloudfunctions.net/github-fileInfo?repo=' + this.config.git.repo +
-      '&branch=' + this.config.git.branch +
-      '&owner=' + this.config.git.owner +
-      '&path=' + data.nodeData.p +
-      '&date=' + commitDate
+    //   let uri = 'https://us-central1-webgl-gource-1da99.cloudfunctions.net/github-fileInfo?repo=' + this.config.git.repo +
+    //   '&branch=' + this.config.git.branch +
+    //   '&owner=' + this.config.git.owner +
+    //   '&path=' + data.nodeData.p +
+    //   '&date=' + commitDate
 
-      uri = uri.replace('+', '%2B')
+    //   uri = uri.replace('+', '%2B')
 
-      window.fetch(uri, {
-        method: 'POST'
-      })
-        .then(res => res.text())
-        .then((body) => {
-          let fileCommitDetails = JSON.parse(body)
+    //   window.fetch(uri, {
+    //     method: 'POST'
+    //   })
+    //     .then(res => res.text())
+    //     .then((body) => {
+    //       let fileCommitDetails = JSON.parse(body)
 
-          let fileNameArr = data.nodeData.p.split('/')
-          let fileName = fileNameArr[fileNameArr.length - 1]
+    //       let fileNameArr = data.nodeData.p.split('/')
+    //       let fileName = fileNameArr[fileNameArr.length - 1]
 
-          this.setState({
-            selectedFileCommitID: fileCommitDetails.oid,
-            selectedFileAuthorLogin: fileCommitDetails.author.user !== null ? fileCommitDetails.author.user.login : fileCommitDetails.author.email,
-            selectedFileAuthorEmail: fileCommitDetails.author.email,
-            selectedFileAuthorName: fileCommitDetails.author.name,
-            selectedFileAuthorImg: fileCommitDetails.author.avatarUrl,
-            selectedFileCommitURL: fileCommitDetails.commitUrl,
-            selectedFileDate: fileCommitDetails.author.date,
-            selectedFileDateRelative: moment(fileCommitDetails.author.date).locale(langLocales[this.config.lang]).fromNow(),
-            selectedFileMessage: fileCommitDetails.message,
-            selectedFileName: fileName,
-            showFileInfo: true,
-            loadingFileInfo: false
-          })
-        })
-        .catch(() => {
-          this.controls.enableDamping = true
-          this.controls.enabled = true
-          this.setState({
-            showFileInfo: false,
-            loadingFileInfo: false
-          })
-        })
-    }.bind(this))
+    //       this.setState({
+    //         selectedFileCommitID: fileCommitDetails.oid,
+    //         selectedFileAuthorLogin: fileCommitDetails.author.user !== null ? fileCommitDetails.author.user.login : fileCommitDetails.author.email,
+    //         selectedFileAuthorEmail: fileCommitDetails.author.email,
+    //         selectedFileAuthorName: fileCommitDetails.author.name,
+    //         selectedFileAuthorImg: fileCommitDetails.author.avatarUrl,
+    //         selectedFileCommitURL: fileCommitDetails.commitUrl,
+    //         selectedFileDate: fileCommitDetails.author.date,
+    //         selectedFileDateRelative: moment(fileCommitDetails.author.date).locale(langLocales[this.config.lang]).fromNow(),
+    //         selectedFileMessage: fileCommitDetails.message,
+    //         selectedFileName: fileName,
+    //         showFileInfo: true,
+    //         loadingFileInfo: false
+    //       })
+    //     })
+    //     .catch(() => {
+    //       this.controls.enableDamping = true
+    //       this.controls.enabled = true
+    //       this.setState({
+    //         showFileInfo: false,
+    //         loadingFileInfo: false
+    //       })
+    //     })
+    // }.bind(this))
   }
 
   onMouseMove (e) {
@@ -1446,92 +1446,92 @@ class Medusa extends mixin(EventEmitter, Component) {
   //   })
   // }
 
-  sortCommitsSidebar (currentCommitIndex) {
-    if (typeof this.commitsAboveArr === 'undefined' || typeof this.commitsBelowArr === 'undefined') {
-      return
-    }
+  // sortCommitsSidebar (currentCommitIndex) {
+  //   if (typeof this.commitsAboveArr === 'undefined' || typeof this.commitsBelowArr === 'undefined') {
+  //     return
+  //   }
 
-    // current commit
-    let data = this.state.currentCommit
-    data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('ddd, MMM Do YYYY, h:mm:ss a')
-    data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
-    data.gravatar = this.getGravatar(data.email, 40)
-    let sidebarCommits = [data]
+  //   // current commit
+  //   let data = this.state.currentCommit
+  //   data.dateLong = moment(data.date).locale(langLocales[this.config.lang]).format('ddd, MMM Do YYYY, h:mm:ss a')
+  //   data.dateShort = moment(data.date).locale(langLocales[this.config.lang]).format('MMM Do')
+  //   data.gravatar = this.getGravatar(data.email, 40)
+  //   let sidebarCommits = [data]
 
-    let added = 0
-    for (let index = 0; index < this.config.display.sidebarCommitLimit * 2; index++) {
-      let commitToAddAbove = this.commitsAboveArr.shift()
-      if (typeof commitToAddAbove !== 'undefined') {
-        sidebarCommits.push(commitToAddAbove)
-        added++
-      }
-      let commitToAddBelow = this.commitsBelowArr.shift()
-      if (typeof commitToAddBelow !== 'undefined') {
-        sidebarCommits.push(commitToAddBelow)
-        added++
-      }
+  //   let added = 0
+  //   for (let index = 0; index < this.config.display.sidebarCommitLimit * 2; index++) {
+  //     let commitToAddAbove = this.commitsAboveArr.shift()
+  //     if (typeof commitToAddAbove !== 'undefined') {
+  //       sidebarCommits.push(commitToAddAbove)
+  //       added++
+  //     }
+  //     let commitToAddBelow = this.commitsBelowArr.shift()
+  //     if (typeof commitToAddBelow !== 'undefined') {
+  //       sidebarCommits.push(commitToAddBelow)
+  //       added++
+  //     }
 
-      if (added === this.config.display.sidebarCommitLimit - 1) {
-        break
-      }
-    }
+  //     if (added === this.config.display.sidebarCommitLimit - 1) {
+  //       break
+  //     }
+  //   }
 
-    sidebarCommits.sort((a, b) => {
-      return b.index - a.index
-    })
+  //   sidebarCommits.sort((a, b) => {
+  //     return b.index - a.index
+  //   })
 
-    this.setState({
-      sideBarCommits: sidebarCommits,
-      sidebarCurrentCommitIndex: currentCommitIndex
-    })
-  }
+  //   this.setState({
+  //     sideBarCommits: sidebarCommits,
+  //     sidebarCurrentCommitIndex: currentCommitIndex
+  //   })
+  // }
 
   toggleSpherize () {
     this.config.FDG.sphereProject = !this.state.spherize
     this.setState({ spherize: this.config.FDG.sphereProject })
   }
 
-  setPlay (bool) {
-    let play = bool
-    this.setState({ play: play })
+  // setPlay (bool) {
+  //   let play = bool
+  //   this.setState({ play: play })
 
-    if (!play) {
-      this.APIprocessing = false
-      this.commitsToProcess = []
-    }
+  //   if (!play) {
+  //     this.APIprocessing = false
+  //     this.commitsToProcess = []
+  //   }
 
-    if (play && !this.APIprocessing) {
-      // go back to start if play head at end
-      if (this.maxIndex === this.state.currentCommitIndex) {
-        this.setDate(moment(this.minDate))
-        return
-      }
-      this.callAPI()
-    }
-  }
+  //   if (play && !this.APIprocessing) {
+  //     // go back to start if play head at end
+  //     if (this.maxIndex === this.state.currentCommitIndex) {
+  //       this.setDate(moment(this.minDate))
+  //       return
+  //     }
+  //     this.callAPI()
+  //   }
+  // }
 
-  togglePlay () {
-    let play = !this.state.play
-    this.setState({ play: play })
+  // togglePlay () {
+  //   let play = !this.state.play
+  //   this.setState({ play: play })
 
-    if (!play) {
-      this.APIprocessing = false
-      this.commitsToProcess = []
-    }
+  //   if (!play) {
+  //     this.APIprocessing = false
+  //     this.commitsToProcess = []
+  //   }
 
-    if (play && !this.APIprocessing) {
-      this.callAPI()
-    }
-  }
+  //   if (play && !this.APIprocessing) {
+  //     this.callAPI()
+  //   }
+  // }
 
-  loadCommit (hash = '') {
-    if (hash) {
-      this.loadCommitHash = hash
-      this.commitsToProcess = [hash]
-      this.setState({ play: false })
-      this.callAPI()
-    }
-  }
+  // loadCommit (hash = '') {
+  //   if (hash) {
+  //     this.loadCommitHash = hash
+  //     this.commitsToProcess = [hash]
+  //     this.setState({ play: false })
+  //     this.callAPI()
+  //   }
+  // }
 
   goToPrev () {
     this.loadPrevCommit = true
