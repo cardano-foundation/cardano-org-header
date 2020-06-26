@@ -621,10 +621,15 @@ class Medusa extends mixin(EventEmitter, Component) {
   // }
 
   componentDidMount () {
-    this.config.FDG.colorPalette = this.props.colorPalette
-    this.config.theme = this.props.theme
+    if (typeof this.props.colorPalette !== 'undefined') {
+      this.config.FDG.colorPalette = this.props.colorPalette
+    }
 
-    if (this.props.camPosZ) {
+    if (typeof this.props.theme !== 'undefined') {
+      this.config.theme = this.props.theme
+    }
+
+    if (typeof this.props.camPosZ !== 'undefined') {
       this.config.camera.initPos.z = this.props.camPosZ
     }
 
@@ -633,7 +638,12 @@ class Medusa extends mixin(EventEmitter, Component) {
   }
 
   componentDidUpdate (prevProps) {
-    this.config.theme = this.props.theme
+    if (prevProps.theme !== this.props.theme) {
+      this.config.theme = this.props.theme
+    }
+    if (prevProps.colorPalette !== this.props.colorPalette) {
+      this.config.FDG.colorPalette = this.props.colorPalette
+    }
   }
 
   componentWillUnmount () {

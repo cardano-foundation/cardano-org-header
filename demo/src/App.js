@@ -41,7 +41,6 @@ class App extends Component {
               '#3b7882',
               '#ffffff'
             ]}
-            ref='demo'
           />
         </div>
       )

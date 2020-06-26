@@ -152,7 +152,8 @@ const Config = {
     debugPicker: false
   },
   floatType: detector.isIOS ? HalfFloatType : FloatType,
-  GPUTier: GPUTier
+  GPUTier: GPUTier,
+  theme: 'dark'
 }
 
 export default Config
