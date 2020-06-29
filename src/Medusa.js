@@ -302,6 +302,11 @@ class Medusa extends mixin(EventEmitter, Component) {
     this.config = Config
 
     this.nodesStatic = nodes[0]
+
+    if (this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_1') {
+      this.nodesStatic.splice(1500)
+    }
+
     this.config.FDG.nodeCount = this.nodesStatic.length
     this.edgesStatic = edges
 

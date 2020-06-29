@@ -28,7 +28,7 @@ void main(){
     a *= (15000.0 / length(vMvPosition.xyz)) * 0.06;
 
     vec3 newCamPos = vCamPos - (normalize(vCamPos) * 600.0);
-    float distToCamPos = distance(vCurrentPosition.xyz, newCamPos);
+    // float distToCamPos = distance(vCurrentPosition.xyz, newCamPos);
 
     float backside = 1.0;
     if (dot( vCurrentPosition.xyz - normalize(vCamPos) * 150.0, normalize(vCamPos) ) > 0.0) {
