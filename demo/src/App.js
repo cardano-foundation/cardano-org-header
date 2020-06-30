@@ -33,6 +33,7 @@ class App extends Component {
       return (
         <div>
           <Medusa
+            ariaLabel='Directory Structure for the ouroboros-network git repository'
             theme='dark'
             className='medusa-container'
             camPosZ={600}

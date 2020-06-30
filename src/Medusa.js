@@ -1854,13 +1854,14 @@ class Medusa extends mixin(EventEmitter, Component) {
           config={this.config}
         /> */}
         {/* {this.UI()} */}
-        <canvas width={this.config.scene.width} height={this.config.scene.height} id={this.config.scene.canvasID} />
+        <canvas role='img' aria-label={this.props.ariaLabel} width={this.config.scene.width} height={this.config.scene.height} id={this.config.scene.canvasID} />
       </div>
     )
   }
 }
 
 Medusa.propTypes = {
+  ariaLabel: PropTypes.string,
   className: PropTypes.string,
   colorPalette: PropTypes.array,
   theme: PropTypes.string,
