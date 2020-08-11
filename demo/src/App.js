@@ -25,6 +25,33 @@ class App extends Component {
       return false
     }
 
+    const gl = glContext.getSupportedExtensions()
+
+    if (gl.indexOf('ANGLE_instanced_arrays') === -1) {
+      console.log('ANGLE_instanced_arrays support is required to run this app')
+      return false
+    }
+
+    if (gl.indexOf('OES_texture_float') === -1) {
+      console.log('OES_texture_float support is required to run this app')
+      return false
+    }
+
+    if (gl.indexOf('OES_texture_float_linear') === -1) {
+      console.log('OES_texture_float support is required to run this app')
+      return false
+    }
+
+    if (gl.indexOf('OES_texture_half_float') === -1) {
+      console.log('OES_texture_float support is required to run this app')
+      return false
+    }
+
+    if (gl.indexOf('OES_texture_half_float_linear') === -1) {
+      console.log('OES_texture_float support is required to run this app')
+      return false
+    }
+
     return true
   }
 
